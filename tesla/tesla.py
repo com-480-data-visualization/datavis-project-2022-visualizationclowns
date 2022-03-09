@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# In[ ]:
+# %%
 
 pip install yfinance
 
