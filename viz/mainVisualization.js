@@ -52,6 +52,31 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .style("stroke-width", "1px")
     .style("opacity", "0");
 
+  mouseLine
+    .append("svg:rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+    .attr("cursor", "none")
+    .on("mouseout", function () {
+      d3.select(".mouse-line").style("opacity", "0");
+    })
+    .on("mouseover", function () {
+      d3.select(".mouse-line").style("opacity", "1");
+    })
+    .on("mousemove", function (event) {
+      const offset = mouseLine.node().getBoundingClientRect();
+
+      const mouse = [event.layerX, event.layerY];
+
+      d3.select(".mouse-line").attr("d", function () {
+        let d = "M" + (mouse[0] - offset.x) + "," + height;
+        d += " " + (mouse[0] - offset.x) + "," + 0;
+        return d;
+      });
+    });
+
   svg
     .append("path")
     .datum(crypto)
