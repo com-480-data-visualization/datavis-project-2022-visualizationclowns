@@ -19,6 +19,13 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  const tweetsSvg = d3
+    .select("body")
+    .append("svg")
+    .attr("width", 200)
+    .attr("height", 80)
+    .attr("color", "black");
+
   const x = d3
     .scaleTime()
     .domain(
@@ -69,6 +76,27 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
       const offset = mouseLine.node().getBoundingClientRect();
 
       const mouse = [event.layerX, event.layerY];
+
+      let xDate = x.invert(mouse[0] - offset.x);
+      tweetsSvg.selectAll(".tweet-box").remove();
+      tweets
+        .filter((tweet) => {
+          const tweetDate = new Date(tweet.created_at);
+          const hoverDate = new Date(xDate);
+
+          const sameYear = tweetDate.getFullYear() === hoverDate.getFullYear();
+          const sameMonth = tweetDate.getMonth() === hoverDate.getMonth();
+
+          return sameYear && sameMonth;
+        })
+        .forEach((tweet, index) => {
+          tweetsSvg
+            .append("svg")
+            .attr("class", "tweet-box")
+            .append("text")
+            .text(tweet.tweet)
+            .attr("transform", `translate(0, ${index * 30})`);
+        });
 
       d3.select(".mouse-line").attr("d", function () {
         let d = "M" + (mouse[0] - offset.x) + "," + height;
