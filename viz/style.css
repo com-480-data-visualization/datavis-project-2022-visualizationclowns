@@ -10,3 +10,51 @@
 svg {
   overflow: visible;
 }
+
+.tweets {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tweets::-webkit-scrollbar {
+  display: none;
+}
+
+.tweet-box {
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 24px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 10px 5px;
+  padding: 16px;
+  max-width: 468px;
+}
+
+.tweet-text {
+  color: #0f1419;
+}
+
+.tweet-date {
+  font-size: 12px;
+  padding-bottom: 8px;
+  opacity: 0.5;
+}
+
+.tweet-date::before {
+  content: "@elonmusk ";
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto 468px;
+}

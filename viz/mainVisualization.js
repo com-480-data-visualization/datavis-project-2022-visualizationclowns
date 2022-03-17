@@ -6,25 +6,29 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     tweet.tweet.match(new RegExp(`.*([b,B]itcoin|BTC).*`))
   );
 
-  let margin = { top: 10, right: 30, bottom: 30, left: 60 },
-    width =
-      document.body.getBoundingClientRect().width - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+  crypto = crypto.slice(1000);
+
+  const mssecondsMonth = 2.628e9;
+
+  const timeSpan =
+    new Date(crypto.at(-1).Date).getTime() - new Date(crypto[0].Date).getTime();
+
+  const months = timeSpan / mssecondsMonth;
+
+  let margin = { top: 10, right: 30, bottom: 30, left: 60 };
+  let width =
+    document.body.getBoundingClientRect().width -
+    margin.left -
+    margin.right -
+    468;
+  let height = 400 - margin.top - margin.bottom;
 
   const svg = d3
-    .select("body")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .select(".main-chart")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  const tweetsSvg = d3
-    .select("body")
-    .append("svg")
-    .attr("width", 200)
-    .attr("height", 80)
-    .attr("color", "black");
+  const tweetsSvg = d3.select(".tweets");
 
   const x = d3
     .scaleTime()
@@ -55,8 +59,8 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
   mouseLine
     .append("path")
     .attr("class", "mouse-line")
-    .style("stroke", "black")
-    .style("stroke-width", "1px")
+    .style("stroke", "darkgrey")
+    .style("stroke-width", width / months)
     .style("opacity", "0");
 
   mouseLine
@@ -66,9 +70,6 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .attr("fill", "none")
     .attr("pointer-events", "all")
     .attr("cursor", "none")
-    .on("mouseout", function () {
-      d3.select(".mouse-line").style("opacity", "0");
-    })
     .on("mouseover", function () {
       d3.select(".mouse-line").style("opacity", "1");
     })
@@ -84,18 +85,19 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
           const tweetDate = new Date(tweet.created_at);
           const hoverDate = new Date(xDate);
 
-          const sameYear = tweetDate.getFullYear() === hoverDate.getFullYear();
-          const sameMonth = tweetDate.getMonth() === hoverDate.getMonth();
-
-          return sameYear && sameMonth;
+          return (
+            tweetDate.getTime() >= hoverDate.getTime() &&
+            tweetDate.getTime() < hoverDate.getTime() + mssecondsMonth
+          );
         })
         .forEach((tweet, index) => {
-          tweetsSvg
-            .append("svg")
-            .attr("class", "tweet-box")
-            .append("text")
-            .text(tweet.tweet)
-            .attr("transform", `translate(0, ${index * 30})`);
+          const tweetBox = tweetsSvg.append("div").attr("class", "tweet-box");
+
+          tweetBox
+            .append("div")
+            .attr("class", "tweet-date")
+            .text(tweet.created_at);
+          tweetBox.append("div").attr("class", "tweet-class").text(tweet.tweet);
         });
 
       d3.select(".mouse-line").attr("d", function () {
@@ -111,6 +113,7 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
+    .attr("pointer-events", "none")
     .attr(
       "d",
       d3
