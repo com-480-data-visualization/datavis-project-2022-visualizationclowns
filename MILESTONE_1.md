@@ -1,30 +1,17 @@
-# Project of Data Visualization (COM-480)
-
-| Student's name | SCIPER |
-| -------------- | ------ |
-| Albert Aillet | 350968 |
-| Alexander Brokking | 350973 |
-| Shrirang Bagdi | 350699 |
-
-[Milestone 1](#milestone-1-friday-8th-april-5pm) • 
-[Milestone 2](#milestone-2-friday-6th-may-5pm) • 
-[Milestone 3](#milestone-3-friday-3rd-june-5pm)
-
 ## Milestone 1 (Friday 8th April, 5pm)
-
-**10% of the final grade**
 
 ### Dataset
 
-- **Kaggle** [link](https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv)
+- **Kaggle**
 
 Elon Musk tweets 2011-2021 (March)    
+https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv
 
-- **Twitter API** [link](https://developer.twitter.com/en/docs/twitter-api)
+- **Twitter API**
 
 Elon Musk tweets, Twitter dev API (March 2021 - Current)
 
-- **Yahoo Finance API**: [link](https://pypi.org/project/yfinance/)
+- **Yahoo Finance API**: 
 
 Cryptocurrencies 2010-Current 
 Tesla stock 2010-Current
@@ -50,13 +37,7 @@ This visualization aims to illustrate the impact Elon Musk's tweets have on the 
 
 ### Exploratory Data Analysis
 
-See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using plotly graphs.
-
-To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code).
-```python 
-pio.renderers.default = "svg"
-``` 
-
+See [this notebook](exploration\data_exploration.ipynb). Information about both the tweets and the asset price data are presented using interactive plotly graphs.
 
 ### Related work
 
@@ -69,28 +50,3 @@ Neither of the notebooks create any interactive visualizations that allow the us
 What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
 
 We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. Some visualizations that we found interesting are these following ones.  
-
-[1] https://www.washingtonpost.com/opinions/2021/05/26/elon-musk-tweets-crypto-markets/
-
-[2] https://www.cnbc.com/2021/01/29/elon-musks-tweets-are-moving-markets.html
-
-[3] https://www.sec.gov/news/press-release/2018-219
-
-[a] https://www.kaggle.com/code/stevenslater/elon-musk-crypto-analysis
-
-[b] https://www.kaggle.com/code/hidelloon/dogecoin-and-dogefather-elon-musk
-
-## Milestone 2 (Friday 6th May, 5pm)
-
-**10% of the final grade**
-
-
-## Milestone 3 (Friday 3rd June, 5pm)
-
-**80% of the final grade**
-
-
-## Late policy
-
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
