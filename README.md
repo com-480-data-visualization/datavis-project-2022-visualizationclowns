@@ -72,7 +72,8 @@ We have also been inspired of visualization from [Visual Capitalist](visualcapit
 <img src="https://www.visualcapitalist.com/wp-content/uploads/2021/10/Decline-in-the-U.S-Car-Production.jpg" width="25%" title="Decline in the US car production">
 </p>
 
-Another source of inspiration are the some of the OPENAI blog pages that have a beautiful presentation and clean visualizations. Examples are the [Clip blog](https://openai.com/blog/clip/), [Image GPT](https://openai.com/blog/image-gpt/) and [GPT](https://openai.com/blog/better-language-models/).
+Another source of inspiration are the some of the OPENAI blog pages that have a beautiful presentation and clean visualizations. 
+Nice examples are the [Clip blog](https://openai.com/blog/clip/#probe-chart), [Image GPT](https://openai.com/blog/image-gpt/#chart-val) and [GPT](https://openai.com/blog/better-language-models/).
 
 [1] https://www.washingtonpost.com/opinions/2021/05/26/elon-musk-tweets-crypto-markets/
 
