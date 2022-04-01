@@ -16,28 +16,26 @@
 
 ### Dataset
 
-- **Kaggle** [link](https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv)
+- **Kaggle**: ([link](https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv))
 
 Elon Musk tweets 2011-2021 (March)    
 
-- **Twitter API** [link](https://developer.twitter.com/en/docs/twitter-api)
+- **Twitter API**: ([link](https://developer.twitter.com/en/docs/twitter-api))
 
 Elon Musk tweets, Twitter dev API (March 2021 - Current)
 
-- **Yahoo Finance API**: [link](https://pypi.org/project/yfinance/)
+- **Yahoo Finance API**: ([link](https://pypi.org/project/yfinance/))
 
 Cryptocurrencies 2010-Current 
 Tesla stock 2010-Current
 
-### Description
+#### Description
 
-Three main data sources for creating the visualization datasets were identified; Yahoo Finance , Kaggle and Twitter developer API. 
+Three main data sources for creating the visualization datasets were identified: Yahoo Finance, Kaggle and the Twitter developer API. 
 
-Yahoo Finance provides an easy to use API for fetching high quality asset price data over a predetermined sample period. It will allow us to collect crypto and stock data in the same format and over the same period. Thus, very little preprocessing will be required to combine them for visualization. 
+Yahoo Finance provides an easy to use API for fetching high quality asset price data over a predetermined sample period. It will allow us to collect crypto and stock data in the same format and over the same period. Thus, very little preprocessing will be required to combine them for visualization.
 
 To create the Elon Musk tweet data set, two seperate data sources will have to be leveraged. Firstly, a public domain dataset available on kaggle provides historical tweets between 2011 and March 2021. However, to analyze his more recent tweets, additional tweets will be collected through the twitter developer api and then be used to enhance the original tweet dataset. This requires interfacing with Twitter’s developer api and some data preprocessing to make the datasets compatible. Specifically, columns have to be processed into the same format and any dataset overlap has to be removed. Because there is a limit to how far back into the history tweets can be retrieved using the standard Twitter developer account, the full dataset cannot be created through the Twitter API. Ultimately, the data we are utilizing is of good quality as we are able to use the data as it is for its intended use. 
-
-
 
 ### Problematic
 
@@ -52,11 +50,10 @@ This visualization aims to illustrate the impact Elon Musk's tweets have on the 
 
 See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using plotly graphs.
 
-To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code).
+To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code in the first cell.
 ```python 
 pio.renderers.default = "png"
 ``` 
-
 
 ### Related work
 
@@ -65,10 +62,19 @@ There are two recent examples on Kaggle where users have created notebooks analy
 Neither of the notebooks create any interactive visualizations that allow the user to idiosyncratically investigate the data. Moreover, the data is limited to the period up to March 2021 and only focuses on the Dogecoin crypto. It would thus be interesting to expand these analyses with more recent data and apply them to additional assets. 
 
 
+We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. 
 
-What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
+We have also been inspired of visualization from (Visual Capitalist)[visualcapitalist.com/] for example the following ones.
 
-We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. Some visualizations that we found interesting are these following ones.  
+![FED Tapering](https://advisor.visualcapitalist.com/wp-content/uploads/2022/01/MIAM_48_Main_1200-3.jpeg)
+
+![Bitcoin is Near All-Time Highs and the Mainstream Doesn’t Care…Yet](https://www.visualcapitalist.com/wp-content/uploads/2020/11/bitcoin-price-all-time-highs-vs-search-interest.jpg)
+
+![Bank Branching is bying](https://www.visualcapitalist.com/wp-content/uploads/2021/11/Datastream_BranchBankingDead_Main.jpg)
+
+![Decline in the US car production](https://www.visualcapitalist.com/wp-content/uploads/2021/10/Decline-in-the-U.S-Car-Production.jpg)
+
+Another source of inspiration are the some of the OPENAI blog pages that have a beautiful presentation and clean visualizations. Examples are the [Clip blog](https://openai.com/blog/clip/), [Image GPT](https://openai.com/blog/image-gpt/) and [GPT](https://openai.com/blog/better-language-models/).
 
 [1] https://www.washingtonpost.com/opinions/2021/05/26/elon-musk-tweets-crypto-markets/
 
