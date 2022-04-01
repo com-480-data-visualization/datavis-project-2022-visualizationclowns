@@ -65,14 +65,12 @@ Neither of the notebooks create any interactive visualizations that allow the us
 We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. 
 
 We have also been inspired of visualization from (Visual Capitalist)[visualcapitalist.com/] for example the following ones.
-
-![FED Tapering](https://advisor.visualcapitalist.com/wp-content/uploads/2022/01/MIAM_48_Main_1200-3.jpeg)
-
-![Bitcoin is Near All-Time Highs and the Mainstream Doesn’t Care…Yet](https://www.visualcapitalist.com/wp-content/uploads/2020/11/bitcoin-price-all-time-highs-vs-search-interest.jpg)
-
-![Bank Branching is bying](https://www.visualcapitalist.com/wp-content/uploads/2021/11/Datastream_BranchBankingDead_Main.jpg)
-
-![Decline in the US car production](https://www.visualcapitalist.com/wp-content/uploads/2021/10/Decline-in-the-U.S-Car-Production.jpg)
+<p float="left">
+<img src="https://advisor.visualcapitalist.com/wp-content/uploads/2022/01/MIAM_48_Main_1200-3.jpeg" width="22%" title="FED Tapering">
+<img src="https://www.visualcapitalist.com/wp-content/uploads/2020/11/bitcoin-price-all-time-highs-vs-search-interest.jpg" width="24%" title="Bitcoin is Near All-Time Highs and the Mainstream Doesn’t Care…Yet">
+<img src="https://www.visualcapitalist.com/wp-content/uploads/2021/11/Datastream_BranchBankingDead_Main.jpg" width="25%" title="Bank Branching is dying">
+<img src="https://www.visualcapitalist.com/wp-content/uploads/2021/10/Decline-in-the-U.S-Car-Production.jpg" width="25%" title="Decline in the US car production">
+</p>
 
 Another source of inspiration are the some of the OPENAI blog pages that have a beautiful presentation and clean visualizations. Examples are the [Clip blog](https://openai.com/blog/clip/), [Image GPT](https://openai.com/blog/image-gpt/) and [GPT](https://openai.com/blog/better-language-models/).
 
