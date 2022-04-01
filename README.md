@@ -54,7 +54,7 @@ See [this notebook](exploration/data_exploration.ipynb). Information about both 
 
 To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code).
 ```python 
-pio.renderers.default = "svg"
+pio.renderers.default = "png"
 ``` 
 
 
