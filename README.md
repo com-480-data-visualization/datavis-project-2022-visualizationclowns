@@ -53,7 +53,13 @@ This visualization aims to illustrate the impact Elon Musk's tweets have on the 
 
 ### Exploratory Data Analysis
 
-See [this notebook](exploration\data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using interactive plotly graphs.
+See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using plotly graphs.
+
+To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code).
+```python 
+pio.renderers.default = "svg"
+``` 
+
 
 ### Related work
 
