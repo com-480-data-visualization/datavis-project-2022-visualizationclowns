@@ -12,22 +12,19 @@
 
 ## Milestone 1 (Friday 8th April, 5pm)
 
-## Milestone 1 (Friday 8th April, 5pm)
-
 **10% of the final grade**
 
 ### Dataset
 
-- **Kaggle**
+- **Kaggle** [link](https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv)
 
 Elon Musk tweets 2011-2021 (March)    
-https://www.kaggle.com/ayhmrba/elon-musk-tweets-2010-2021?select=2021.csv
 
-- **Twitter API**
+- **Twitter API** [link](https://developer.twitter.com/en/docs/twitter-api)
 
 Elon Musk tweets, Twitter dev API (March 2021 - Current)
 
-- **Yahoo Finance API**: 
+- **Yahoo Finance API**: [link](https://pypi.org/project/yfinance/)
 
 Cryptocurrencies 2010-Current 
 Tesla stock 2010-Current
@@ -53,7 +50,7 @@ This visualization aims to illustrate the impact Elon Musk's tweets have on the 
 
 ### Exploratory Data Analysis
 
-See [this notebook](exploration\data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using interactive plotly graphs.
+See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using interactive plotly graphs.
 
 ### Related work
 
