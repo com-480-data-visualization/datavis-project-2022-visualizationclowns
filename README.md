@@ -64,7 +64,7 @@ Neither of the notebooks create any interactive visualizations that allow the us
 
 We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. 
 
-We have also been inspired of visualization from (Visual Capitalist)[visualcapitalist.com/] for example the following ones.
+We have also been inspired of visualization from [Visual Capitalist](visualcapitalist.com) for example the following ones.
 <p float="left">
 <img src="https://advisor.visualcapitalist.com/wp-content/uploads/2022/01/MIAM_48_Main_1200-3.jpeg" width="22%" title="FED Tapering">
 <img src="https://www.visualcapitalist.com/wp-content/uploads/2020/11/bitcoin-price-all-time-highs-vs-search-interest.jpg" width="24%" title="Bitcoin is Near All-Time Highs and the Mainstream Doesn’t Care…Yet">
