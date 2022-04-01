@@ -3,7 +3,7 @@
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Albert Aillet | 350968 |
-| | |
+| Alexander Brokking | 350973 |
 | | |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
