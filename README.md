@@ -41,49 +41,61 @@ To create the Elon Musk tweet data set, two seperate data sources will have to b
 
 Elon Musk is a highly public persona and cultural phenomena of the twenty-first century. As one of the world’s richest individuals, Elon Musk has founded several incredibly successful companies including PayPal, the Boring Company, Tesla, and SpaceX. 
 
-With Elon Musk’s influence and large cultural following including almost 80M Twitter followers, many of the things he has to say can have far reaching effects. In recent years, Elon Musk has received criticism and come under scrutiny from media and regulators accusing him of market manipulation of stock markets to cryptocurrency prices [1][2][3]. 
+With Elon Musk’s influence and large cultural following including almost 80M Twitter followers, many of the things he tweets about can have far reaching effects. In recent years, Elon Musk has received criticism and come under scrutiny from media and regulators accusing him of market manipulation of stocks and cryptocurrencies 
+[[1](https://www.washingtonpost.com/opinions/2021/05/26/elon-musk-tweets-crypto-markets/)]
+[[2](https://www.cnbc.com/2021/01/29/elon-musks-tweets-are-moving-markets.html)]. On september 27th 2018 he was for example charged by the Securities and Exchange Commission with securities fraud for a series of false and misleading tweets about a potential transaction to take Tesla private 
+[[3](https://www.sec.gov/news/press-release/2018-219)].
 
-This visualization aims to illustrate the impact Elon Musk's tweets have on the stock and cryptocurrency markets. The visualizations seek to empower people who want to investigate Elon Musk’s potential market influence including future investors who desire to understand the different trends that affect the market. If an influence could be established, it would underline the importance of conducting research and understanding the news and and public figures have put out before investing.  
+In the last days as of writing it has been brought to light that Elon Musk is Twitter's largest shareholder as he owns 9.2% of Twitter [[4](https://www.ft.com/content/29b9c884-02d7-4d1c-a4ab-c862242fa76e)]. As a result of information about Musks ownership made public, Twitter shares have surged about 26% in premarket trading [[5](https://time.com/6164223/elon-musk-twitter-stake/)] showing once again how Elon Musk has influence on the stock market.
+
+Our visualization aims to illustrate the impact Elon Musk's tweets have on the stock and cryptocurrency markets. The visualizations seek to empower people who want to investigate Elon Musk’s potential market influence including future investors who desire to understand the different trends that affect the market. If an influence could be established, it would underline the importance of conducting research and understanding the news and and public figures have put out before investing.  
 
 
 ### Exploratory Data Analysis
 
-See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using plotly graphs.
+See [this notebook](exploration/data_exploration.ipynb). Information about both the collected tweets and the asset price data are presented using plotly graphs. 
 
-To get interactive graphs run the notebook locally or online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/) and comment out the following code in the first cell.
+The data exploration was inspired by the below mentioned Kaggle notebook as well as **Exploring Elon Musk Tweets** (Kaggle user Aleksey Bilogur, [link](https://www.kaggle.com/code/residentmario/exploring-elon-musk-tweets))
+
+To get interactive plotly graphs run the notebook locally (or possibly online using for example [nbviewer](https://nbviewer.org/), [Binder](https://mybinder.org/) or [Colab](https://colab.research.google.com/)) and comment out the following code in the first cell.
+
+From:
 ```python 
 pio.renderers.default = "png"
+``` 
+To:
+```python 
+# pio.renderers.default = "png"
 ``` 
 
 ### Related work
 
-There are two recent examples on Kaggle where users have created notebooks analyzing Elon Musk’s tweets impact on the Dogecoin crypto prices [a][b]. One of them focuses on the trading returns using a strategy consisting of investing when Elon Musk references the crypto currency in a tweet. It also includes sentiment analysis of the tweets, but the Kaggle user concludes them as unsatisfactory. The second notebook puts greater emphasis on Elon Musk’s potential Twitter impact on the Dogecoin asset price and identifies a set of tweets that could have been highly influential. 
+There are multiple recent examples on Kaggle where users have created notebooks analyzing Elon Musk’s tweets impact on the Dogecoin crypto prices.
+The ones we were able to find are linked here:
 
-Neither of the notebooks create any interactive visualizations that allow the user to idiosyncratically investigate the data. Moreover, the data is limited to the period up to March 2021 and only focuses on the Dogecoin crypto. It would thus be interesting to expand these analyses with more recent data and apply them to additional assets. 
+1. **Elon Musk Crypto Analysis** (Kaggle user Steven Slater, March 2022, [link](https://www.kaggle.com/code/stevenslater/elon-musk-crypto-analysis)) 
+2. **Dogecoin📀 and DogeFather (Elon Musk)🧑🏻‍🚀** (Kaggle user Youngjin Choin, August 2021, [link](https://www.kaggle.com/code/hidelloon/dogecoin-and-dogefather-elon-musk))
+3. **💰Bitcoin/Dogecoin on RAPIDS and Elon Musk** (Kaggle user Andrada Olteanu, March 2021, [link](https://www.kaggle.com/code/andradaolteanu/bitcoin-dogecoin-on-rapids-and-elon-musk))
 
+*Elon Musk Crypto Analysis* focuses on the trading returns using a strategy consisting of investing when Elon Musk references the crypto currency in a tweet. It also includes sentiment analysis of the tweets, but the Kaggle user concludes them as unsatisfactory. *Dogecoin📀 and DogeFather (Elon Musk)🧑🏻‍🚀* puts greater emphasis on Elon Musk’s potential Twitter impact on the Dogecoin asset price and identifies a set of tweets that could have been highly influential. 
 
-We are inspired by the different datasets we found on Kaggle relating to the famous tweets of Elon Musk such as this [one](https://www.kaggle.com/code/andradaolteanu/bitcoin-dogecoin-on-rapids-and-elon-musk/notebook). 
+Neither of the notebooks create any interactive visualizations that allow the user to idiosyncratically investigate the data. Moreover, the data is limited to the period up to March 2021 and mostly focuses on the Dogecoin cryptocurrency. It would therefore be interesting to expand these analyses with more recent data and apply them to additional assets.
 
-We have also been inspired of visualization from [Visual Capitalist](visualcapitalist.com) for example the following ones.
+We were inspired by the analyses we found on Kaggle, especially those mentioned above.
+
+An unrelated source of inspiration for our visualizations are the some of the OPENAI blog pages that have a beautiful presentation and clean graphs. 
+Some examples are the 
+<a href="https://openai.com/blog/clip/#probe-chart" title = "Chart of model efficiency">CLIP blog</a>, 
+<a href="https://openai.com/blog/image-gpt/#chart-val" title = "Generative performance graph">Image GPT blog</a> and 
+<a href="https://openai.com/blog/better-language-models/" title = "GPT blog page presentation">GPT blog</a>.
+
+We have also been inspired by visualizations from the [Visual Capitalist](visualcapitalist.com) website, for example the following ones.
 <p float="left">
 <img src="https://advisor.visualcapitalist.com/wp-content/uploads/2022/01/MIAM_48_Main_1200-3.jpeg" width="22%" title="FED Tapering">
 <img src="https://www.visualcapitalist.com/wp-content/uploads/2020/11/bitcoin-price-all-time-highs-vs-search-interest.jpg" width="24%" title="Bitcoin is Near All-Time Highs and the Mainstream Doesn’t Care…Yet">
 <img src="https://www.visualcapitalist.com/wp-content/uploads/2021/11/Datastream_BranchBankingDead_Main.jpg" width="25%" title="Bank Branching is dying">
 <img src="https://www.visualcapitalist.com/wp-content/uploads/2021/10/Decline-in-the-U.S-Car-Production.jpg" width="25%" title="Decline in the US car production">
 </p>
-
-Another source of inspiration are the some of the OPENAI blog pages that have a beautiful presentation and clean visualizations. 
-Nice examples are the [Clip blog](https://openai.com/blog/clip/#probe-chart), [Image GPT](https://openai.com/blog/image-gpt/#chart-val) and [GPT](https://openai.com/blog/better-language-models/).
-
-[1] https://www.washingtonpost.com/opinions/2021/05/26/elon-musk-tweets-crypto-markets/
-
-[2] https://www.cnbc.com/2021/01/29/elon-musks-tweets-are-moving-markets.html
-
-[3] https://www.sec.gov/news/press-release/2018-219
-
-[a] https://www.kaggle.com/code/stevenslater/elon-musk-crypto-analysis
-
-[b] https://www.kaggle.com/code/hidelloon/dogecoin-and-dogefather-elon-musk
 
 ## Milestone 2 (Friday 6th May, 5pm)
 
