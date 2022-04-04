@@ -62,7 +62,7 @@ There are two recent examples on Kaggle where users have created notebooks analy
 Neither of the notebooks create any interactive visualizations that allow the user to idiosyncratically investigate the data. Moreover, the data is limited to the period up to March 2021 and only focuses on the Dogecoin crypto. It would thus be interesting to expand these analyses with more recent data and apply them to additional assets. 
 
 
-We are inspired by the different datasets we found on Kaggle as well as the famous tweets of Elon Musk. 
+We are inspired by the different datasets we found on Kaggle relating to the famous tweets of Elon Musk such as this [one](https://www.kaggle.com/code/andradaolteanu/bitcoin-dogecoin-on-rapids-and-elon-musk/notebook). 
 
 We have also been inspired of visualization from [Visual Capitalist](visualcapitalist.com) for example the following ones.
 <p float="left">
