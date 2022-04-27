@@ -1,4 +1,4 @@
-import styles from "./style.css" assert { type: "css" };
+import "/style.css";
 import * as d3 from "https://unpkg.com/d3?module";
 import { generateTweetsVsPrice } from "./mainVisualization";
 
