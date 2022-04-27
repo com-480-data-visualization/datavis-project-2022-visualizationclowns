@@ -1,4 +1,4 @@
-import styles from "./style.css";
+import styles from "./style.css" assert { type: "css" };
 import * as d3 from "https://unpkg.com/d3?module";
 
 export const generateTweetsVsPrice = (tweets, crypto) => {
