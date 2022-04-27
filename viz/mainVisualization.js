@@ -1,5 +1,5 @@
 import "./style.css";
-import * as d3 from "https://unpkg.com/d3?module";
+import * as d3 from d3;
 
 export const generateTweetsVsPrice = (tweets, crypto) => {
   tweets = tweets.filter((tweet) =>
