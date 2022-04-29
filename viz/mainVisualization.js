@@ -8,13 +8,6 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
 
   crypto = crypto.slice(1000);
 
-  const mssecondsMonth = 2.628e9;
-
-  const timeSpan =
-    new Date(crypto.at(-1).Date).getTime() - new Date(crypto[0].Date).getTime();
-
-  const months = timeSpan / mssecondsMonth;
-
   let margin = { top: 10, right: 30, bottom: 30, left: 60 };
   let width =
     document.body.getBoundingClientRect().width -
@@ -54,58 +47,47 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .range([height, 0]);
   svg.append("g").call(d3.axisLeft(y));
 
-  const mouseLine = svg.append("g").attr("class", "mouse-over-effects");
+  var brush = d3
+    .brushX()
+    .extent([[0, 0], [width, height]])
+    .on("start brush end", brushed);
 
-  mouseLine
-    .append("path")
-    .attr("class", "mouse-line")
-    .style("stroke", "darkgrey")
-    .style("stroke-width", width / months)
-    .style("opacity", "0");
+  svg
+    .append("g")
+    //.attr("class", "brush")
+    .call(brush)
+    .call(brush.move, x.range());
 
-  mouseLine
-    .append("svg:rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("fill", "none")
-    .attr("pointer-events", "all")
-    .attr("cursor", "none")
-    .on("mouseover", function () {
-      d3.select(".mouse-line").style("opacity", "1");
-    })
-    .on("mousemove", function (event) {
-      const offset = mouseLine.node().getBoundingClientRect();
+  function brushed (event) {
+    console.log(event.selection);
+    const mouse = event.selection
 
-      const mouse = [event.layerX, event.layerY];
+    let xDateMin = x.invert(mouse[0]);
+    let xDateMax = x.invert(mouse[1]);
+    tweetsSvg.selectAll(".tweet-box").remove();
+    tweets
+      .filter((tweet) => {
+        const tweetDate = new Date(tweet.created_at);
+        const hoverDateMin = new Date(xDateMin);
+        const hoverDateMax = new Date(xDateMax);
 
-      let xDate = x.invert(mouse[0] - offset.x);
-      tweetsSvg.selectAll(".tweet-box").remove();
-      tweets
-        .filter((tweet) => {
-          const tweetDate = new Date(tweet.created_at);
-          const hoverDate = new Date(xDate);
-
-          return (
-            tweetDate.getTime() >= hoverDate.getTime() &&
-            tweetDate.getTime() < hoverDate.getTime() + mssecondsMonth
-          );
-        })
-        .forEach((tweet, index) => {
-          const tweetBox = tweetsSvg.append("div").attr("class", "tweet-box");
-
-          tweetBox
-            .append("div")
-            .attr("class", "tweet-date")
-            .text(tweet.created_at);
-          tweetBox.append("div").attr("class", "tweet-class").text(tweet.tweet);
-        });
-
-      d3.select(".mouse-line").attr("d", function () {
-        let d = "M" + (mouse[0] - offset.x) + "," + height;
-        d += " " + (mouse[0] - offset.x) + "," + 0;
-        return d;
+        return (
+          tweetDate.getTime() >= hoverDateMin.getTime() &&
+          tweetDate.getTime() <= hoverDateMax.getTime()
+        );
+      })
+      .forEach((tweet, index) => {
+        const tweetBox = tweetsSvg.append("div").attr("class", "tweet-box");
+        tweetBox
+          .append("div")
+          .attr("class", "tweet-date")
+          .text(tweet.created_at)
+          .append("div")
+          .attr("class", "tweet-class")
+          .text(tweet.tweet);
       });
-    });
+    }
+
 
   svg
     .append("path")
