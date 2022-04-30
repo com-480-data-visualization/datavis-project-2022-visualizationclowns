@@ -1,5 +1,6 @@
 import "./style.css";
 import * as d3 from "https://unpkg.com/d3?module";
+import { addTweetBox } from "./tweet";
 
 export const generateTweetsVsPrice = (tweets, crypto) => {
   tweets = tweets.filter((tweet) =>
@@ -55,8 +56,7 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
   svg
     .append("g")
     .attr("class", "brush")
-    .call(brush)
-    .call(brush.move, [0, 0]);
+    .call(brush);
 
   function brushed (event) {
     const mouse = event.selection
@@ -76,15 +76,7 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
         );
       })
       .forEach((tweet, index) => {
-        tweetsSvg
-          .append("div")
-          .attr("class", "tweet-box")
-          .append("div")
-          .attr("class", "tweet-date")
-          .text(tweet.created_at)
-          .append("div")
-          .attr("class", "tweet-class")
-          .text(tweet.tweet);
+        addTweetBox(tweet, tweetsSvg);
       });
     }
 

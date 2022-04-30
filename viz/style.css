@@ -40,6 +40,27 @@ svg {
   max-width: 468px;
 }
 
+.tweet-box:hover {
+  background-color: #eee;
+}
+
+.tweet-img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+}
+
+.tweet-name {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.tweet-handle {
+  color: #888;
+  margin-bottom: 1px;
+  font-size: 12px;
+}
+
 .tweet-text {
   color: #0f1419;
 }
@@ -48,10 +69,6 @@ svg {
   font-size: 12px;
   padding-bottom: 8px;
   opacity: 0.5;
-}
-
-.tweet-date::before {
-  content: "@elonmusk ";
 }
 
 .container {
