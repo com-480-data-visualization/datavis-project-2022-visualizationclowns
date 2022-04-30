@@ -45,14 +45,8 @@ export const addTweetBox = (tweet, svg) => {
         .attr("class", "tweet-text")
         .text(tweet.tweet);
 
-    
     box
         .append("div")
         .attr("class", "tweet-date")
-        .text(`${(date.getHours() % 12 || 12)}:`+
-            `${String("00" + date.getMinutes()).slice(-2)} 
-            ${date.getHours() >= 12 ? "PM" : "AM"} 
-            ${months[date.getMonth()]} 
-            ${date.getDate()}, 
-            ${date.getFullYear()}`);
+        .text(d3.timeFormat("%-I:%M %p · %b %-d, %Y · Twitter for iPhone")(date));
 };
