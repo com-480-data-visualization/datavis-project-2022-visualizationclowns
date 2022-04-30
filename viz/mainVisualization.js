@@ -50,16 +50,15 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
   var brush = d3
     .brushX()
     .extent([[0, 0], [width, height]])
-    .on("start brush end", brushed);
+    .on("brush end", brushed);
 
   svg
     .append("g")
-    //.attr("class", "brush")
+    .attr("class", "brush")
     .call(brush)
-    .call(brush.move, x.range());
+    .call(brush.move, [0, 0]);
 
   function brushed (event) {
-    console.log(event.selection);
     const mouse = event.selection
 
     let xDateMin = x.invert(mouse[0]);
@@ -77,8 +76,9 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
         );
       })
       .forEach((tweet, index) => {
-        const tweetBox = tweetsSvg.append("div").attr("class", "tweet-box");
-        tweetBox
+        tweetsSvg
+          .append("div")
+          .attr("class", "tweet-box")
           .append("div")
           .attr("class", "tweet-date")
           .text(tweet.created_at)
