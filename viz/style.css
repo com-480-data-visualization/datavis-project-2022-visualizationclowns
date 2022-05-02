@@ -23,6 +23,23 @@ svg {
   display: none;
 }
 
+.tweet-box-header {
+  display: flex;
+}
+
+.tweet-box-header > div {
+  margin-left: 12px;
+}
+
+.tweet-header-name {
+  display: flex;
+}
+
+.tweet-header-name > img {
+  margin-top: 5px;
+  margin-left: 4px;
+}
+
 .tweet-box {
   display: flex;
   flex-direction: column;

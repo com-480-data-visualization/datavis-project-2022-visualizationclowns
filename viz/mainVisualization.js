@@ -26,9 +26,7 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
 
   const x = d3
     .scaleTime()
-    .domain(
-      d3.extent(crypto, d => (new Date(d.Date)))
-    )
+    .domain(d3.extent(crypto, (d) => new Date(d.Date)))
     .range([0, width]);
   svg
     .append("g")
@@ -37,15 +35,12 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
 
   const y = d3
     .scaleLinear()
-    .domain([
-      0,
-      d3.max(crypto, d => (+d.Close))
-    ])
+    .domain([0, d3.max(crypto, (d) => +d.Close)])
     .range([height, 0]);
   svg.append("g").call(d3.axisLeft(y));
 
   const brushed = (event) => {
-    const selection = event.selection
+    const selection = event.selection;
 
     let xDateMin = x.invert(selection[0]);
     let xDateMax = x.invert(selection[1]);
@@ -64,17 +59,17 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
       .forEach((tweet, index) => {
         addTweetBox(tweet, tweetsSvg);
       });
-  }
+  };
 
   var brush = d3
     .brushX()
-    .extent([[0, 0], [width, height]])
+    .extent([
+      [0, 0],
+      [width, height],
+    ])
     .on("brush end", brushed);
 
-  svg
-    .append("g")
-    .attr("class", "brush")
-    .call(brush);
+  svg.append("g").attr("class", "brush").call(brush);
 
   svg
     .append("path")
@@ -87,23 +82,23 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
       "d",
       d3
         .line()
-        .x(d => x(new Date(d.Date)))
-        .y(d => y(+d.Close))
+        .x((d) => x(new Date(d.Date)))
+        .y((d) => y(+d.Close))
     );
-      
-    // Plotting the relevant tweets
-    svg
-      .append("g")
-      .selectAll("dot")
-      .data(tweets)
-      .enter()
-      .append("circle")
-      .attr("cx", d => x(new Date(d.created_at)))
-      .attr("cy", d => {
-        const bisect = d3.bisector(d => (new Date(d.Date))).right;
-        const i = bisect(crypto, new Date(d.created_at));
-        return y(+crypto[i].Close);
-      })
-      .attr("r", 3)
-      .style("fill", "red");
+
+  // Plotting the relevant tweets
+  svg
+    .append("g")
+    .selectAll("dot")
+    .data(tweets)
+    .enter()
+    .append("circle")
+    .attr("cx", (d) => x(new Date(d.created_at)))
+    .attr("cy", (d) => {
+      const bisect = d3.bisector((d) => new Date(d.Date)).right;
+      const i = bisect(crypto, new Date(d.created_at));
+      return y(+crypto[i].Close);
+    })
+    .attr("r", 3)
+    .style("fill", "red");
 };
