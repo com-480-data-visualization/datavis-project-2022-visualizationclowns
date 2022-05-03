@@ -8,6 +8,9 @@ import { generateTweetsVsPrice } from "./mainVisualization";
 // `;
 
 (async () => {
+  const radioSelect = d3.selectAll(".radio");
+  radioSelect.on("change", (e) => console.log(e.target.value));
+
   const crypto = await d3.csv("/coin_Bitcoin.csv");
   let tweets = await d3.csv("/alltweets.csv");
 

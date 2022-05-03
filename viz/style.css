@@ -89,6 +89,13 @@ svg {
 }
 
 .container {
+  position: relative;
   display: grid;
   grid-template-columns: auto 468px;
+}
+
+.dataset-radios {
+  position: absolute;
+  left: 5%;
+  top: 32px;
 }

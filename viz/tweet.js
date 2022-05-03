@@ -28,10 +28,7 @@ export const addTweetBox = (tweet, svg) => {
 
   header
     .append("img")
-    .attr(
-      "src",
-      "https://pbs.twimg.com/profile_images/1503591435324563456/foUrqiEw_400x400.jpg"
-    )
+    .attr("src", "/musk_100x100.jpg")
     .attr("alt", "Elon Musk")
     .attr("class", "tweet-img");
 

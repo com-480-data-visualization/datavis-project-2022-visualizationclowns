@@ -100,5 +100,16 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
       return y(+crypto[i].Close);
     })
     .attr("r", 3)
-    .style("fill", "red");
+    .style("fill", "red")
+    .style("cursor", "pointer")
+    .on("mouseover", function () {
+      d3.select(this).transition().duration("100").attr("r", 6);
+    })
+    .on("mouseout", function () {
+      d3.select(this).transition().duration("100").attr("r", 3);
+    })
+    .on("click", (event, tweet) => {
+      tweetsSvg.selectAll(".tweet-box").remove();
+      addTweetBox(tweet, tweetsSvg);
+    });
 };
