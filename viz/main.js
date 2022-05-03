@@ -8,11 +8,20 @@ import { generateTweetsVsPrice } from "./mainVisualization";
 // `;
 
 (async () => {
-  const radioSelect = d3.selectAll(".radio");
-  radioSelect.on("change", (e) => console.log(e.target.value));
+  const bitcoin = await d3.csv("/coin_Bitcoin.csv");
+  const dogecoin = await d3.csv("/coin_Dogecoin.csv");
+  const tesla = await d3.csv("/tesla.csv");
 
-  const crypto = await d3.csv("/coin_Bitcoin.csv");
+  const datasets = {
+    bitcoin: bitcoin,
+    dogecoin: dogecoin,
+    tesla: tesla,
+  };
   let tweets = await d3.csv("/alltweets.csv");
 
-  generateTweetsVsPrice(tweets, crypto);
+  const radioSelect = d3.selectAll(".radio");
+  radioSelect.on("change", (e) =>
+    generateTweetsVsPrice(tweets, datasets[e.target.value])
+  );
+  generateTweetsVsPrice(tweets, datasets["bitcoin"]);
 })();

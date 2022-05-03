@@ -2,12 +2,12 @@ import "./style.css";
 import * as d3 from "https://unpkg.com/d3?module";
 import { addTweetBox } from "./tweet";
 
-export const generateTweetsVsPrice = (tweets, crypto) => {
+export const generateTweetsVsPrice = (tweets, price) => {
   tweets = tweets.filter((tweet) =>
     tweet.tweet.match(new RegExp(`.*([b,B]itcoin|BTC).*`))
   );
 
-  crypto = crypto.slice(1000);
+  price = price.slice(1000);
 
   let margin = { top: 10, right: 30, bottom: 30, left: 60 };
   let width =
@@ -17,16 +17,19 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     468;
   let height = 400 - margin.top - margin.bottom;
 
+  d3.selectAll(".main-chart-group").remove();
+
   const svg = d3
     .select(".main-chart")
     .append("g")
+    .attr("class", "main-chart-group")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   const tweetsSvg = d3.select(".tweets");
 
   const x = d3
     .scaleTime()
-    .domain(d3.extent(crypto, (d) => new Date(d.Date)))
+    .domain(d3.extent(price, (d) => new Date(d.Date)))
     .range([0, width]);
   svg
     .append("g")
@@ -35,7 +38,7 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
 
   const y = d3
     .scaleLinear()
-    .domain([0, d3.max(crypto, (d) => +d.Close)])
+    .domain([0, d3.max(price, (d) => +d.Close)])
     .range([height, 0]);
   svg.append("g").call(d3.axisLeft(y));
 
@@ -71,9 +74,10 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
 
   svg.append("g").attr("class", "brush").call(brush);
 
-  svg
+  // Plotting the chart-line
+  const line = svg
     .append("path")
-    .datum(crypto)
+    .datum(price)
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
@@ -86,6 +90,18 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
         .y((d) => y(+d.Close))
     );
 
+  // Animate in the line
+  (() => {
+    const lineLength = line.node().getTotalLength();
+    line
+      .attr("stroke-dasharray", lineLength + " " + lineLength)
+      .attr("stroke-dashoffset", lineLength)
+      .transition()
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0)
+      .duration(6000);
+  })();
+
   // Plotting the relevant tweets
   svg
     .append("g")
@@ -96,8 +112,8 @@ export const generateTweetsVsPrice = (tweets, crypto) => {
     .attr("cx", (d) => x(new Date(d.created_at)))
     .attr("cy", (d) => {
       const bisect = d3.bisector((d) => new Date(d.Date)).right;
-      const i = bisect(crypto, new Date(d.created_at));
-      return y(+crypto[i].Close);
+      const i = bisect(price, new Date(d.created_at));
+      return y(+price[i].Close);
     })
     .attr("r", 3)
     .style("fill", "red")
