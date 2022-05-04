@@ -1,23 +1,7 @@
 import * as d3 from "https://unpkg.com/d3?module";
 import "./style.css";
 
-// Inspired by this https://github.com/com-480-data-visualization/data-visualization-project-2021-jin-juice/blob/master/website/src/race/Tweet.js
-// TODO: add verified icon and twitter logo and move name to correct spot.
-
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+// TODO: add twitter logo, nlikes, nretweets, nreplies.
 
 export const addTweetBox = (tweet, svg) => {
   const date = new Date(tweet.created_at);
