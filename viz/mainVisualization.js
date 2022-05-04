@@ -3,10 +3,6 @@ import * as d3 from "https://unpkg.com/d3?module";
 import { addTweetBox } from "./tweet";
 
 export const generateTweetsVsPrice = (tweets, price) => {
-  tweets = tweets.filter((tweet) =>
-    tweet.tweet.match(new RegExp(`.*([b,B]itcoin|BTC).*`))
-  );
-
   price = price.slice(1000);
 
   let margin = { top: 10, right: 30, bottom: 30, left: 60 };

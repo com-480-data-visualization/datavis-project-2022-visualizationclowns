@@ -17,11 +17,27 @@ import { generateTweetsVsPrice } from "./mainVisualization";
     dogecoin: dogecoin,
     tesla: tesla,
   };
+
   let tweets = await d3.csv("/alltweets.csv");
+
+  const filtered_tweets = {
+    bitcoin: tweets.filter((tweet) =>
+      tweet.tweet.toLowerCase().match(new RegExp(`.*(bitcoin|btc).*`))
+    ),
+    dogecoin: tweets.filter((tweet) =>
+      tweet.tweet.toLowerCase().match(new RegExp(`.*(doge).*`))
+    ),
+    tesla: tweets.filter((tweet) =>
+      tweet.tweet.toLowerCase().match(new RegExp(`.*(tsla|tesla stock).*`))
+    ),
+  };
 
   const radioSelect = d3.selectAll(".radio");
   radioSelect.on("change", (e) =>
-    generateTweetsVsPrice(tweets, datasets[e.target.value])
+    generateTweetsVsPrice(
+      filtered_tweets[e.target.value],
+      datasets[e.target.value]
+    )
   );
-  generateTweetsVsPrice(tweets, datasets["bitcoin"]);
+  generateTweetsVsPrice(filtered_tweets["bitcoin"], datasets["bitcoin"]);
 })();
