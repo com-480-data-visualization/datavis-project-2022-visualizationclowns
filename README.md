@@ -105,12 +105,10 @@ We have also been inspired by visualizations from the [Visual Capitalist](visual
 **10% of the final grade**
 
 ### Sketches of our visualizations
-
-<div style="display:flex;gap:20px">
-<div style="width:30%">
-<img src="images/PageLayout.png" width="100%" title="Page Layout">
-</div>
-<div style="width:70%">
+<table>
+  <tr>
+    <td valign="top" width="40%"><img src="images/PageLayout.png"/></td>
+    <td valign="top">
 To explore Elon Musk’s twitter impact on the stock and cryptocurrency markets, three main visualizations aim to be presented on our website. Between them there will be interludes with introductory texts and interesting takeaways.
 
 Our current thinking is that this application will be a single page react app where navigation will either scroll the user down to the relevant part of the app or re-route the user to a page with an excerpt containing the specific visualization.
@@ -121,10 +119,9 @@ The tools we expect to need to accomplish this visualization are the following:
 - D3 (JavaScript library for producing dynamic, interactive data visualizations).
 - React (JavaScript library for building user interfaces based on UI components).
 - Three.js (potentially) (JavaScript library interface used to create and display animated 3D computer graphics).
-
-</div>
-</div>
-
+</td>
+  </tr>
+</table>
 <p float="center">
 <img src="images/MainVizSlide.png" width="100%" title="Main Visualization Layout">
 </p>
@@ -139,31 +136,31 @@ Visualization 2. Engagement ranking. This will be a sorted ranking of how tweets
 
 ### Theory concepts used:
 
-The concepts we make use of in our visualization are the following:
+The concepts from the lectures we make use of in our visualization are the following:
 
-- Brushing (from the Interaction lecture): the plot uses brushing to choose the period from which we want to view tweets, which makes it possible for the user to choose which part of the data they want to view.
+- Brushing (from the Interaction lecture): The plot uses brushing to choose the period from which we want to view tweets, which makes it possible for the user to choose which part of the data they want to view.
 
-- Linking (from the Interaction lecture): we link the plot of the asset price and the view of the tweets together as the tweets that are selected on the main plot are then shown in detail in the text box.
+- Linking (from the Interaction lecture): We link the plot of the asset price and the view of the tweets together as the tweets that are selected on the main plot are then shown in detail in the text box.
 
-- Filtering (Interaction): We filter part of the dataset to the tweets that are relevant to the asset we want to view.
+- Filtering (from the Interaction lecture): We filter part of the dataset to the tweets that are relevant to the asset we want to view.
 
-- Layering (Interaction): We view both the time of the tweets and the asset price data at the same time.
+- Layering (from the Interaction lecture): We view both the time of the tweets and the asset price data at the same time to should they relationship.
 
-- We start at zero and try to show the whole context (Do and don'ts)
+- In out main visualization we start the price chart at zero and try to show the whole context (from the Do and don'ts lecture).
 
-- We think we strive for the most simple view of the data and have not useless visual elements that detract from the message. (Do and don'ts)
+- We think we strive for the most simple view of the data and have not useless visual elements that detract from the message. (from the Do and don'ts lecture)
 
-- From lecture 6, we aim to use the described concepts regarding choosing related colors for sequential and divergent data. Moreover, we aim to use the theory of visual popout to illustrate significant features and principles of grouping to visually organize our content.
+- We aim to use the described concepts regarding choosing related colors for sequential and divergent data. Moreover, we aim to use the theory of visual popout to illustrate significant features and principles of grouping to visually organize our content. (from the Color Perception lecture)
 
 ### More advanced ideas
 
 We have also considered a few more advanced ideas that may be implemented if there is time available:
-Enable switching between darkmode / lightmode.
-Loading Screen when loading the datasets.
-Automatically update tweet and price datasets as we have access to the twitter and yahoo finance APIs.
-Advanced scroll animations and dataset transitions.
-Accessibility focus, where you can listen to the texts. Potentially use AI to interpret the graphs and text-to-speech to read them.
-Use three js to 3D animate features that improve storytelling.
+- Enable switching between darkmode / lightmode.
+- Loading Screen when loading the datasets.
+- Automatically update tweet and price datasets as we have access to the twitter and yahoo finance APIs.
+- Advanced scroll animations and dataset transitions.
+- Accessibility focus, where you can listen to the texts. Potentially use AI to interpret the graphs and text-to-speech to read them.
+- Use three.js to 3D animate features that improve storytelling.
 
 ### Initial website
 
