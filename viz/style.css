@@ -99,3 +99,12 @@ svg {
   left: 100px;
   top: 32px;
 }
+
+/* ------ */
+
+.tweets-ranking {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}

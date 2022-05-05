@@ -29,7 +29,7 @@ import { addTweetBox } from "./tweet";
       }),
   };
 
-  const tweetsSvg = d3.select(".tweets");
+  const tweetsSvg = d3.select(".tweets-ranking");
 
   const radioSelect = d3.selectAll(".radio");
   radioSelect.on("change", (e) => {
