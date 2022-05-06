@@ -105,6 +105,7 @@ We have also been inspired by visualizations from the [Visual Capitalist](visual
 **10% of the final grade**
 
 ### Sketches of our visualizations
+
 <table>
   <tr>
     <td valign="top" width="40%"><img src="images/PageLayout.png"/></td>
@@ -134,6 +135,12 @@ Visualization 1. Main chart visualization and selected tweets. This will be the 
 
 Visualization 2. Engagement ranking. This will be a sorted ranking of how tweets relevant to the different datasets can be ordered in terms of engagement. It will help to illustrate if the most engaging tweets have a bigger impact on asset prices.
 
+<p float="center">
+<img src="images/ComparisonSlide.png" width="70%" title="Twitter ranking">
+</p>
+
+Visualization 3. Engagement comparison. This will be a bar chart that compares the different datasets in terms of the chosen engagement. The different engagements users can select are likes, retweets, and shares. This will help to see which type of stock/crypto has the best engagement among the tweets.
+
 ### Theory concepts used:
 
 The concepts from the lectures we make use of in our visualization are the following:
@@ -155,6 +162,7 @@ The concepts from the lectures we make use of in our visualization are the follo
 ### More advanced ideas
 
 We have also considered a few more advanced ideas that may be implemented if there is time available:
+
 - Enable switching between darkmode / lightmode.
 - Loading Screen when loading the datasets.
 - Automatically update tweet and price datasets as we have access to the twitter and yahoo finance APIs.
