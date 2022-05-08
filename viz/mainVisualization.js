@@ -6,7 +6,7 @@ export const generateTweetsVsPrice = (tweets, price) => {
   price = price.slice(1000);
 
   // add rolling sum of price (would like to start at n but that gives a bug)
-  const n = 100;
+  const n = 50;
   for (let i = 0; i < price.length; i++) {
     price[i].rollingaverage =
       price.slice(i - n, i).reduce((sum, d) => sum + +d.Close, 0) / n;
@@ -139,11 +139,12 @@ export const generateTweetsVsPrice = (tweets, price) => {
     .attr("cy", (d) => {
       const bisect = d3.bisector((d) => new Date(d.Date)).right;
       const i = bisect(price, new Date(d.created_at));
-      return y(+price[i].Close);
+      return y(+price[i].rollingaverage);
     })
     .attr("r", 3)
     .style("fill", "red")
     .style("cursor", "pointer")
+    // these have to be functions to use the this keyword
     .on("mouseover", function () {
       d3.select(this).transition().duration("100").attr("r", 6);
     })
