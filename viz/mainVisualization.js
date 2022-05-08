@@ -5,6 +5,13 @@ import { addTweetBox } from "./tweet";
 export const generateTweetsVsPrice = (tweets, price) => {
   price = price.slice(1000);
 
+  // add rolling sum of price (would like to start at n but that gives a bug)
+  const n = 50;
+  for (let i = 0; i < price.length; i++) {
+    price[i].rollingaverage =
+      price.slice(i - n, i).reduce((sum, d) => sum + +d.Close, 0) / n;
+  }
+
   let margin = { top: 10, right: 30, bottom: 30, left: 60 };
   let width =
     document.body.getBoundingClientRect().width -
@@ -70,7 +77,7 @@ export const generateTweetsVsPrice = (tweets, price) => {
 
   svg.append("g").attr("class", "brush").call(brush);
 
-  // Plotting the chart-line
+  // Plotting the price-line
   const line = svg
     .append("path")
     .datum(price)
@@ -84,6 +91,29 @@ export const generateTweetsVsPrice = (tweets, price) => {
         .line()
         .x((d) => x(new Date(d.Date)))
         .y((d) => y(+d.Close))
+    );
+
+  // Plotting the running average-line
+  const averageline = svg
+    .append("path")
+    .datum(price)
+    .attr("fill", "none")
+    .attr("stroke", "green")
+    .attr("stroke-width", 1.5)
+    .attr("pointer-events", "none")
+    .attr(
+      "d",
+      d3
+        .line()
+        .x((d) => x(new Date(d.Date)))
+        .y((d) => {
+          try {
+            return y(d.rollingaverage);
+          } catch (e) {
+            console.log(d, e);
+            return y(0);
+          }
+        })
     );
 
   // Animate in the line
@@ -109,11 +139,12 @@ export const generateTweetsVsPrice = (tweets, price) => {
     .attr("cy", (d) => {
       const bisect = d3.bisector((d) => new Date(d.Date)).right;
       const i = bisect(price, new Date(d.created_at));
-      return y(+price[i].Close);
+      return y(+price[i].rollingaverage);
     })
     .attr("r", 3)
     .style("fill", "red")
     .style("cursor", "pointer")
+    // these have to be functions to use the this keyword
     .on("mouseover", function () {
       d3.select(this).transition().duration("100").attr("r", 6);
     })
