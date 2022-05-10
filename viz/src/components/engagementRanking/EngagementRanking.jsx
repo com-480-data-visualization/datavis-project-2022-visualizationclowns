@@ -5,9 +5,9 @@ import { addTweetBox } from "../../utils/addTweet";
 const EngagementRanking = ({ tweets }) => {
   const rankingRef = useRef(null);
 
-  const order = (a, b) => d3.descending(a.nlikes, b.nlikes);
+  const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
 
-  const sortedTweets = tweets.sort(order).slice(0, 10);
+  const sortedTweets = [...tweets].sort(order).slice(0, 10);
 
   useEffect(() => {
     if (!rankingRef.current) return;
