@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  height: 64px;
+  align-items: center;
+}
+
+.radioButtons {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+}
+
+.radioButtons > div {
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: bold;
+}

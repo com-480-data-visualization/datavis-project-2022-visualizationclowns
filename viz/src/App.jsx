@@ -1,15 +1,56 @@
+import { useEffect, useState } from "react";
 import css from "./App.module.css";
 import EngagementRanking from "./components/engagementRanking/EngagementRanking";
 import GroupedTweetHistogram from "./components/groupedTweetHistogram/GroupedTweetHistogram";
 import MainChart from "./components/mainChart/MainChart";
 import Navigation from "./components/navigation/Navigation";
 import Paragraph from "./components/paragraph/Paragraph";
+import * as d3 from "d3";
 
 function App() {
+  const [selectedDataset, setSelectedDataset] = useState("Bitcoin");
+  const [datasets, setDatasets] = useState(undefined);
+  const [tweets, setTweets] = useState(undefined);
+
+  useEffect(() => {
+    (async () => {
+      const bitcoin = await d3.csv("/coin_Bitcoin.csv");
+      const dogecoin = await d3.csv("/coin_Dogecoin.csv");
+      const tesla = await d3.csv("/tesla.csv");
+      const tweetsDataset = await d3.csv("/alltweets.csv");
+
+      const datasets = {
+        Bitcoin: bitcoin,
+        Dogecoin: dogecoin,
+        Tesla: tesla,
+      };
+
+      const filtered_tweets = {
+        Bitcoin: tweetsDataset.filter((tweet) =>
+          tweet.tweet.toLowerCase().match(new RegExp(`.*(bitcoin|btc).*`))
+        ),
+        Dogecoin: tweetsDataset.filter((tweet) =>
+          tweet.tweet.toLowerCase().match(new RegExp(`.*(doge).*`))
+        ),
+        Tesla: tweetsDataset.filter((tweet) =>
+          tweet.tweet.toLowerCase().match(new RegExp(`.*(tsla|tesla stock).*`))
+        ),
+      };
+
+      setDatasets(datasets);
+      setTweets(filtered_tweets);
+    })();
+  }, []);
+
+  if (!tweets || !datasets) return <div>Loading...</div>;
+
   return (
     <div className="App">
       <header>
-        <Navigation />
+        <Navigation
+          selectedDataset={selectedDataset}
+          setSelectedDataset={setSelectedDataset}
+        />
         <div className={css.title}>Visualization Clowns</div>
       </header>
       <article className={css.content}>
@@ -26,7 +67,10 @@ function App() {
           </Paragraph>
         </section>
         <section>
-          <MainChart />
+          <MainChart
+            tweets={tweets?.[selectedDataset]}
+            asset={datasets?.[selectedDataset]}
+          />
           <Paragraph>
             Commodo elit at imperdiet dui accumsan sit amet nulla facilisi.
             Mattis rhoncus urna neque viverra. Aenean et tortor at risus viverra
