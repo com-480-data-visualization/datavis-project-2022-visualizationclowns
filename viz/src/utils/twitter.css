@@ -72,4 +72,14 @@
   font-size: 12px;
   padding-bottom: 8px;
   opacity: 0.5;
+  display: flex;
+  justify-content: flex-start;
+  width: 300px;
+  gap: 14px;
+  font-weight: bold;
+}
+
+.tweet-metrics > div > span {
+  margin-left: 4px;
+  font-weight: normal;
 }

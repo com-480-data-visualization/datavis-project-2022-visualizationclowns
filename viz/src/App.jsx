@@ -76,8 +76,6 @@ function App() {
           }),
       };
 
-      console.log(filtered_tweets);
-
       setDatasets(datasets);
       setTweets(filtered_tweets);
     })();

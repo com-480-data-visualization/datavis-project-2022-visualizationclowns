@@ -45,13 +45,17 @@ export const addTweetBox = (tweet, container) => {
     .attr("class", "tweet-date")
     .text(d3.timeFormat("%-I:%M %p · %b %-d, %Y · Twitter for iPhone")(date));
 
-  box
+  const metrics = box.append("div").attr("class", "tweet-metrics");
+
+  metrics
     .append("div")
-    .attr("class", "tweet-metrics")
-    .html(
-      ` <strong>${f(tweet.nretweets)}</strong> Retweets <strong>${f(
-        tweet.nreplies
-      )}</strong> Quote tweets <strong>${f(tweet.nlikes)}</strong> 
-       Likes`
-    );
+    .text(f(tweet.nretweets))
+    .append("span")
+    .text("Retweets");
+  metrics
+    .append("div")
+    .text(f(tweet.nreplies))
+    .append("span")
+    .text("Quote Tweets");
+  metrics.append("div").text(f(tweet.nlikes)).append("span").text("Likes");
 };
