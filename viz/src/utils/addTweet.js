@@ -1,7 +1,7 @@
 import * as d3 from "https://unpkg.com/d3?module";
 import "./twitter.css";
 
-// TODO: add twitter logo, nlikes, nretweets, nreplies.
+// TODO: add twitter logo and price change.
 
 export const addTweetBox = (tweet, container) => {
   const date = new Date(tweet.created_at);
@@ -36,7 +36,7 @@ export const addTweetBox = (tweet, container) => {
   box
     .append("div")
     .attr("class", "tweet-text")
-    .text(tweet.tweet.replace("&amp;", "&"));
+    .text(tweet.tweet.replaceAll("&amp;", "&"));
 
   box
     .append("div")
