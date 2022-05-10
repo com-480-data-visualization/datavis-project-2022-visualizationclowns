@@ -59,7 +59,7 @@ function App() {
       <article className={css.content}>
         <div className={css.title}>Visualization Clowns</div>
         <section className={css.stats}>
-          <HeroStats value={allTweets.length} text={"Number of tweets"} />
+          <HeroStats value={allTweets.length} text={"Total number of tweets"} />
           <HeroStats value={255} text={"Net Worth"} prefix={"$"} suffix={"B"} />
         </section>
         <section>
