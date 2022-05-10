@@ -7,7 +7,7 @@ const EngagementRanking = ({ tweets }) => {
 
   const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
 
-  const sortedTweets = tweets.sort(order).slice(0, 10);
+  const sortedTweets = [...tweets].sort(order).slice(0, 10);
 
   useEffect(() => {
     if (!rankingRef.current) return;
