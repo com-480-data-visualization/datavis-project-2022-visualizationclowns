@@ -64,6 +64,12 @@
 
 .tweet-date {
   font-size: 12px;
+  padding-bottom: 1px;
+  opacity: 0.5;
+}
+
+.tweet-metrics {
+  font-size: 12px;
   padding-bottom: 8px;
   opacity: 0.5;
 }

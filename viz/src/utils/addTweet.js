@@ -6,6 +6,8 @@ import "./twitter.css";
 export const addTweetBox = (tweet, container) => {
   const date = new Date(tweet.created_at);
 
+  const f = d3.format("3.2~s");
+
   const box = container.append("div").attr("class", "tweet-box");
 
   const header = box.append("div").attr("class", "tweet-box-header");
@@ -37,4 +39,14 @@ export const addTweetBox = (tweet, container) => {
     .append("div")
     .attr("class", "tweet-date")
     .text(d3.timeFormat("%-I:%M %p · %b %-d, %Y · Twitter for iPhone")(date));
+
+  box
+    .append("div")
+    .attr("class", "tweet-metrics")
+    .html(
+      ` <strong>${f(tweet.nretweets)}</strong> Retweets <strong>${f(
+        tweet.nreplies
+      )}</strong> Quote tweets <strong>${f(tweet.nlikes)}</strong> 
+       Likes`
+    );
 };
