@@ -20,6 +20,8 @@ export const addTweetBox = (tweet, container) => {
 
   const name = header.append("div").attr("class", "tweet-header-name");
 
+  header.append("div").text(tweet.dayChange);
+
   name
     .append("div")
     .attr("class", "tweet-name")

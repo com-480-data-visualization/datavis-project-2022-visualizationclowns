@@ -35,11 +35,24 @@ function App() {
         };
       };
 
+      const bisector = d3.bisector((d) => new Date(d.Date));
+
       const filtered_tweets = {
-        Bitcoin: tweetsDataset.filter(filter_regex(`.*(bitcoin|btc).*`)),
+        Bitcoin: tweetsDataset
+          .filter(filter_regex(`.*(bitcoin|btc).*`))
+          .map((tweet) => {
+            const index =
+              bisector.left(bitcoin, new Date(tweet.created_at)) - 1;
+            return {
+              ...tweet,
+              dayChange: bitcoin[index + 1].Close - bitcoin[index].Close,
+            };
+          }),
         Dogecoin: tweetsDataset.filter(filter_regex(`.*(doge).*`)),
         Tesla: tweetsDataset.filter(filter_regex(`.*(tesla stock)|(tsla).*`)),
       };
+
+      console.log(filtered_tweets);
 
       setDatasets(datasets);
       setTweets(filtered_tweets);
