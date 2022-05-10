@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import css from "./MainChart.module.css";
 import * as d3 from "d3";
+import { addTweetBox } from "../../utils/addTweet";
 
 const MainChart = ({ asset, tweets }) => {
   console.log(tweets, asset);
@@ -72,7 +73,7 @@ const MainChart = ({ asset, tweets }) => {
           );
         })
         .forEach((tweet, index) => {
-          // addTweetBox(tweet, tweetsSvg);
+          addTweetBox(tweet, tweetsSvg);
         });
     };
 
@@ -167,8 +168,10 @@ const MainChart = ({ asset, tweets }) => {
 
   return (
     <article ref={containerRef} className={css.container}>
-      <svg height={"100%"} width="100%" ref={graphRef} />
-      <section ref={tweetsRef} />
+      <section className={css.graph}>
+        <svg height="100%" width="100%" ref={graphRef} />
+      </section>
+      <section className={css.tweets} ref={tweetsRef} />
     </article>
   );
 };
