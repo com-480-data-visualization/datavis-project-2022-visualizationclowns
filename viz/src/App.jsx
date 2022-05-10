@@ -6,11 +6,13 @@ import MainChart from "./components/mainChart/MainChart";
 import Navigation from "./components/navigation/Navigation";
 import Paragraph from "./components/paragraph/Paragraph";
 import * as d3 from "d3";
+import { HeroStats } from "./components/heroStats/HeroStats";
 
 function App() {
   const [selectedDataset, setSelectedDataset] = useState("Bitcoin");
   const [datasets, setDatasets] = useState(undefined);
   const [tweets, setTweets] = useState(undefined);
+  const [allTweets, setAllTweets] = useState(undefined);
 
   useEffect(() => {
     (async () => {
@@ -18,6 +20,8 @@ function App() {
       const dogecoin = await d3.csv("/coin_Dogecoin.csv");
       const tesla = await d3.csv("/tesla.csv");
       const tweetsDataset = await d3.csv("/alltweets.csv");
+
+      setAllTweets(tweetsDataset);
 
       const datasets = {
         Bitcoin: bitcoin,
@@ -42,7 +46,7 @@ function App() {
     })();
   }, []);
 
-  if (!tweets || !datasets) return <div>Loading...</div>;
+  if (!tweets || !datasets || !allTweets) return <div>Loading...</div>;
 
   return (
     <div className="App">
@@ -54,6 +58,10 @@ function App() {
       </header>
       <article className={css.content}>
         <div className={css.title}>Visualization Clowns</div>
+        <section className={css.stats}>
+          <HeroStats value={allTweets.length} text={"Number of tweets"} />
+          <HeroStats value={255} text={"Net Worth"} prefix={"$"} suffix={"B"} />
+        </section>
         <section>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
