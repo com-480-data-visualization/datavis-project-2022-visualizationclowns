@@ -45,11 +45,35 @@ function App() {
               bisector.left(bitcoin, new Date(tweet.created_at)) - 1;
             return {
               ...tweet,
-              dayChange: bitcoin[index + 1].Close - bitcoin[index].Close,
+              dayChange:
+                (bitcoin[index + 2].Close - bitcoin[index].Close) /
+                bitcoin[index].Close,
             };
           }),
-        Dogecoin: tweetsDataset.filter(filter_regex(`.*(doge).*`)),
-        Tesla: tweetsDataset.filter(filter_regex(`.*(tesla stock)|(tsla).*`)),
+        Dogecoin: tweetsDataset
+          .filter(filter_regex(`.*(doge).*`))
+          .map((tweet) => {
+            const index =
+              bisector.left(dogecoin, new Date(tweet.created_at)) - 1;
+            return {
+              ...tweet,
+              dayChange:
+                (dogecoin[index + 2].Close - dogecoin[index].Close) /
+                dogecoin[index].Close,
+            };
+          }),
+        Tesla: tweetsDataset
+          .filter(filter_regex(`.*(tesla stock)|(tsla).*`))
+          .map((tweet) => {
+            const index = bisector.left(tesla, new Date(tweet.created_at)) - 1;
+            return {
+              ...tweet,
+              dayChange:
+                (tesla[index + 2].Close - tesla[index].Close) /
+                tesla[index].Close,
+              days: [tesla[index + 2], tesla[index]],
+            };
+          }),
       };
 
       console.log(filtered_tweets);
