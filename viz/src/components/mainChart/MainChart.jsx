@@ -4,9 +4,7 @@ import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
 
 const MainChart = ({ asset, tweets }) => {
-  console.log(tweets, asset);
-
-  let price = asset.slice(-1000);
+  let price = asset.slice(-1000); //TODO filter based on time?
   const margin = { top: 10, right: 30, bottom: 30, left: 60 };
 
   const graphRef = useRef(null);
@@ -120,7 +118,6 @@ const MainChart = ({ asset, tweets }) => {
             try {
               return y(d.rollingaverage);
             } catch (e) {
-              console.log(d, e);
               return y(0);
             }
           })
@@ -147,7 +144,6 @@ const MainChart = ({ asset, tweets }) => {
       .attr("cy", (d) => {
         const bisect = d3.bisector((d) => new Date(d.Date)).right;
         const i = bisect(price, new Date(d.created_at));
-        console.log(i);
         return y(+price?.[i]?.Close);
       })
       .attr("r", 3)

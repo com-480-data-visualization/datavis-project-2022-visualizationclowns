@@ -3,10 +3,10 @@ import "./twitter.css";
 
 // TODO: add twitter logo, nlikes, nretweets, nreplies.
 
-export const addTweetBox = (tweet, svg) => {
+export const addTweetBox = (tweet, container) => {
   const date = new Date(tweet.created_at);
 
-  const box = svg.append("div").attr("class", "tweet-box");
+  const box = container.append("div").attr("class", "tweet-box");
 
   const header = box.append("div").attr("class", "tweet-box-header");
 

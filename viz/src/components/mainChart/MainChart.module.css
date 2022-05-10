@@ -3,7 +3,7 @@
   height: 600px;
   display: flex;
   gap: 64px;
-  margin: 64px 16px;
+  margin: 64px 0px;
 }
 
 .graph {

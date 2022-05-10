@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import * as d3 from "d3";
+import { addTweetBox } from "../../utils/addTweet";
 
-const EngagementRanking = () => {
-  return <div>EngagementRanking</div>;
+const EngagementRanking = ({ tweets }) => {
+  const rankingRef = useRef(null);
+
+  const order = (a, b) => d3.descending(a.nlikes, b.nlikes);
+
+  const sortedTweets = tweets.sort(order).slice(0, 10);
+
+  useEffect(() => {
+    if (!rankingRef.current) return;
+    d3.selectAll(".tweet-box").remove();
+    sortedTweets.forEach((tweet) =>
+      addTweetBox(tweet, d3.select(rankingRef.current))
+    );
+  }, [tweets]);
+
+  return (
+    <div>
+      EngagementRanking
+      <div ref={rankingRef} />
+    </div>
+  );
 };
 
 export default EngagementRanking;
