@@ -82,7 +82,7 @@ function App() {
           <EngagementRanking tweets={tweets?.[selectedDataset]} />
         </section>
         <section>
-          <GroupedTweetHistogram />
+          <GroupedTweetHistogram tweets={tweets} />
         </section>
         <section>
           <Paragraph>
