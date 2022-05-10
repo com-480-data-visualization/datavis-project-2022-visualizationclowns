@@ -1,9 +1,18 @@
 .container {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   height: 64px;
   align-items: center;
+  position: fixed;
+  background-color: white;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  justify-content: flex-end;
 }
 
 .radioButtons {

@@ -46,14 +46,14 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      <header className={css.header}>
         <Navigation
           selectedDataset={selectedDataset}
           setSelectedDataset={setSelectedDataset}
         />
-        <div className={css.title}>Visualization Clowns</div>
       </header>
       <article className={css.content}>
+        <div className={css.title}>Visualization Clowns</div>
         <section>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

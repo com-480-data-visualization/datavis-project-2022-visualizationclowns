@@ -6,18 +6,21 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
 
   return (
     <nav className={css.container}>
-      Navigation
-      <section className={css.radioButtons}>
-        {datasets.map((dataset) => (
-          <div
-            className={[dataset === selectedDataset && css.selected].join(" ")}
-            key={dataset}
-            onClick={() => setSelectedDataset(dataset)}
-          >
-            {dataset}
-          </div>
-        ))}
-      </section>
+      <article className={css.content}>
+        <section className={css.radioButtons}>
+          {datasets.map((dataset) => (
+            <div
+              className={[dataset === selectedDataset && css.selected].join(
+                " "
+              )}
+              key={dataset}
+              onClick={() => setSelectedDataset(dataset)}
+            >
+              {dataset}
+            </div>
+          ))}
+        </section>
+      </article>
     </nav>
   );
 };
