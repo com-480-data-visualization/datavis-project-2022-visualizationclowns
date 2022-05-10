@@ -29,16 +29,16 @@ function App() {
         Tesla: tesla,
       };
 
+      const filter_regex = (regex) => {
+        return (tweet) => {
+          return tweet.tweet.toLowerCase().match(new RegExp(regex));
+        };
+      };
+
       const filtered_tweets = {
-        Bitcoin: tweetsDataset.filter((tweet) =>
-          tweet.tweet.toLowerCase().match(new RegExp(`.*(bitcoin|btc).*`))
-        ),
-        Dogecoin: tweetsDataset.filter((tweet) =>
-          tweet.tweet.toLowerCase().match(new RegExp(`.*(doge).*`))
-        ),
-        Tesla: tweetsDataset.filter((tweet) =>
-          tweet.tweet.toLowerCase().match(new RegExp(`.*(tsla|tesla stock).*`))
-        ),
+        Bitcoin: tweetsDataset.filter(filter_regex(`.*(bitcoin|btc).*`)),
+        Dogecoin: tweetsDataset.filter(filter_regex(`.*(doge).*`)),
+        Tesla: tweetsDataset.filter(filter_regex(`.*(tesla stock)|(tsla).*`)),
       };
 
       setDatasets(datasets);
