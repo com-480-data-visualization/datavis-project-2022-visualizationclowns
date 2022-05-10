@@ -7,7 +7,13 @@ const GroupedTweetHistogram = ({ tweets }) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
 
-  const [metric, setMetric] = useState("likes");
+  const metrics = [
+    { metric: "nlikes", name: "Likes" },
+    { metric: "nretweets", name: "Retweets" },
+    { metric: "nreplies", name: "Replies" },
+  ];
+
+  const [metric, setMetric] = useState("nlikes");
 
   useEffect(() => {
     if (!containerRef.current || !svgRef) return;
@@ -19,17 +25,28 @@ const GroupedTweetHistogram = ({ tweets }) => {
 
     for (const [key, value] of Object.entries(tweets)) {
       let totalLikes = 0;
-      tweets[key].forEach((tweet) => {
-        totalLikes = Number(totalLikes) + Number(tweet.nlikes);
+      value.forEach((tweet) => {
+        totalLikes += Number(tweet[metric]);
       });
-      yValues.push(totalLikes / tweets[key].length);
+      yValues.push(totalLikes);
     }
     addChart(yValues, svg, containerRef.current);
-  }, [tweets]);
+  }, [tweets, metric]);
 
   return (
     <div>
       GroupedTweetHistogram
+      <section className={css.metricButtonsContainer}>
+        {metrics.map((metric) => (
+          <div
+            className={css.metricButton}
+            onClick={() => setMetric(metric.metric)}
+            key={metric.metric}
+          >
+            {metric.name}
+          </div>
+        ))}
+      </section>
       <section className={css.container} ref={containerRef}>
         <svg height={"100%"} width={"100%"} ref={svgRef} />
       </section>
