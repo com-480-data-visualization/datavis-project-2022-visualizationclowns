@@ -70,7 +70,7 @@ const MainChart = ({ asset, tweets }) => {
       linepath.attr("d", line(price, xz));
       avpath.attr("d", avline(price, xz));
       tweetsdots(xz);
-      brushg.on("brush end", brushed);
+      brushg.attr("class", "brush").call(d3.brush().clear).call(brush(xz));
       gx.call(xAxis, xz);
     }
 
@@ -101,35 +101,39 @@ const MainChart = ({ asset, tweets }) => {
     svg.append("g").call(yAxis, y);
 
     // Add the brushing
-    const brush = d3
-      .brushX()
-      .extent([
-        [margin.left, -margin.top],
-        [width, height - margin.bottom],
-      ])
-      .on("brush end", brushed);
-    const brushg = svg.append("g").attr("class", "brush").call(brush);
+    const brush = (x) =>
+      d3
+        .brushX()
+        .extent([
+          [margin.left, -margin.top],
+          [width, height - margin.bottom],
+        ])
+        .on("start brush end", brushed(x));
 
-    function brushed(event) {
-      const selection = event.selection;
+    const brushg = svg.append("g").attr("class", "brush").call(brush(x));
 
-      let xDateMin = x.invert(selection[0]);
-      let xDateMax = x.invert(selection[1]);
-      tweetsSvg.selectAll(".tweet-box").remove();
-      tweets
-        .filter((tweet) => {
-          const tweetDate = new Date(tweet.created_at);
-          const hoverDateMin = new Date(xDateMin);
-          const hoverDateMax = new Date(xDateMax);
+    function brushed(xb) {
+      return (event) => {
+        const selection = event.selection;
 
-          return (
-            tweetDate.getTime() >= hoverDateMin.getTime() &&
-            tweetDate.getTime() <= hoverDateMax.getTime()
-          );
-        })
-        .forEach((tweet, index) => {
-          addTweetBox(tweet, tweetsSvg);
-        });
+        let xDateMin = xb.invert(selection[0]);
+        let xDateMax = xb.invert(selection[1]);
+        tweetsSvg.selectAll(".tweet-box").remove();
+        tweets
+          .filter((tweet) => {
+            const tweetDate = new Date(tweet.created_at);
+            const hoverDateMin = new Date(xDateMin);
+            const hoverDateMax = new Date(xDateMax);
+
+            return (
+              tweetDate.getTime() >= hoverDateMin.getTime() &&
+              tweetDate.getTime() <= hoverDateMax.getTime()
+            );
+          })
+          .forEach((tweet, index) => {
+            addTweetBox(tweet, tweetsSvg);
+          });
+      };
     }
 
     // Plotting the price-line
