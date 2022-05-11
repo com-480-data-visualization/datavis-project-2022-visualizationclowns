@@ -37,9 +37,10 @@ function App() {
 
       const bisector = d3.bisector((d) => new Date(d.Date));
 
+      // basic filter 'bitcoin': 36, 'doge': 67, 'tesla': 1227, 'tesla stock': 13,
       const filtered_tweets = {
         Bitcoin: tweetsDataset
-          .filter(filter_regex(`.*(bitcoin|btc).*`))
+          .filter(filter_regex(`(bitcoin|btc)`))
           .map((tweet) => {
             const index =
               bisector.left(bitcoin, new Date(tweet.created_at)) - 1;
@@ -50,20 +51,17 @@ function App() {
                 bitcoin[index].Close,
             };
           }),
-        Dogecoin: tweetsDataset
-          .filter(filter_regex(`.*(doge).*`))
-          .map((tweet) => {
-            const index =
-              bisector.left(dogecoin, new Date(tweet.created_at)) - 1;
-            return {
-              ...tweet,
-              dayChange:
-                (dogecoin[index + 2].Close - dogecoin[index].Close) /
-                dogecoin[index].Close,
-            };
-          }),
+        Dogecoin: tweetsDataset.filter(filter_regex(`doge`)).map((tweet) => {
+          const index = bisector.left(dogecoin, new Date(tweet.created_at)) - 1;
+          return {
+            ...tweet,
+            dayChange:
+              (dogecoin[index + 2].Close - dogecoin[index].Close) /
+              dogecoin[index].Close,
+          };
+        }),
         Tesla: tweetsDataset
-          .filter(filter_regex(`.*(tesla stock)|(tsla).*`))
+          .filter(filter_regex(`((tesla.*(stock|private))|(tsla))`))
           .map((tweet) => {
             const index = bisector.left(tesla, new Date(tweet.created_at)) - 1;
             return {
@@ -75,6 +73,7 @@ function App() {
             };
           }),
       };
+      console.log("filtered: ", filtered_tweets);
 
       setDatasets(datasets);
       setTweets(filtered_tweets);
