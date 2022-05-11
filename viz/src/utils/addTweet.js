@@ -35,10 +35,7 @@ export const addTweetBox = (tweet, container) => {
     .attr("src", "/twitter_verified_badge.svg")
     .attr("height", "16.5px");
 
-  box
-    .append("div")
-    .attr("class", "tweet-text")
-    .text(tweet.tweet.replaceAll("&amp;", "&"));
+  box.append("div").attr("class", "tweet-text").html(tweet.tweet);
 
   box
     .append("div")
