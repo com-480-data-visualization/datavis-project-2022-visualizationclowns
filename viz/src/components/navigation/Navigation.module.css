@@ -28,3 +28,20 @@
 .selected {
   font-weight: bold;
 }
+
+.navigationBalls {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 24px;
+}
+
+.navBall {
+  border-radius: 50%;
+  background-color: black;
+  opacity: 0.6;
+  height: 16px;
+  width: 16px;
+  margin: 0 8px;
+}
