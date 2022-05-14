@@ -223,7 +223,7 @@ const MainChart = ({ asset, tweets }) => {
       <section className={css.graph}>
         <svg height="100%" width="100%" ref={graphRef} />
       </section>
-      <section className={css.tweets} ref={tweetsRef} />
+      <section id="disable" className={css.tweets} ref={tweetsRef} />
     </article>
   );
 };

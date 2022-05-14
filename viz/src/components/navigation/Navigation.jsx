@@ -15,6 +15,8 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
   const [scroll, setScroll] = useState(0);
 
   function onWheel(e) {
+    if (e.path.some((tag) => tag.id == "disable")) return;
+
     const delta = e.deltaY / 8;
     setScroll((prev) =>
       Math.min(Math.max(prev + delta, 0), (sections.length - 1) * 100)

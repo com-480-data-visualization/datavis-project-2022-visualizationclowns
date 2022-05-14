@@ -2,12 +2,12 @@
   width: 100%;
   height: 600px;
   display: flex;
-  gap: 64px;
   margin: 64px 0px;
+  gap: 64px;
 }
 
 .graph {
-  width: 50%;
+  width: calc(100% - 496px - 64px);
 }
 
 .tweets {
