@@ -2,14 +2,24 @@ import React, { useEffect, useRef } from "react";
 import css from "./MainChart.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
-
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
+import uid from "../../utils/uid";
 const MainChart = ({ asset, tweets }) => {
   let price = asset.slice(-1000); //TODO filter based on time?
   const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+  const naviagte = useNavigate();
+  const location = useLocation();
 
   const graphRef = useRef(null);
   const tweetsRef = useRef(null);
   const containerRef = useRef(null);
+  const tweet = location.search?.split("=")[1];
+  console.log(location);
 
   // Add rolling average to data
   const n = 50;
@@ -40,8 +50,11 @@ const MainChart = ({ asset, tweets }) => {
     tweetsSvg.selectChildren().remove();
 
     // Add cliping for clipping lines correclty during zooming
-    const clip = svg
+    const clip = uid("clip");
+
+    svg
       .append("clipPath")
+      .attr("id", clip.id)
       .append("rect")
       .attr("x", margin.left)
       .attr("y", margin.top)
@@ -131,7 +144,7 @@ const MainChart = ({ asset, tweets }) => {
         const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
 
         tweetBoxes.enter().each((tweet) => {
-          addTweetBox(tweet, tweetsSvg);
+          addTweetBox(tweet, tweetsSvg, naviagte);
         });
 
         tweetBoxes.exit().call((x) => {
@@ -172,6 +185,7 @@ const MainChart = ({ asset, tweets }) => {
 
     const avpath = svg
       .append("path")
+      .attr("clip-path", clip)
       .datum(price)
       .attr("fill", "none")
       .attr("stroke", "green")
@@ -197,12 +211,16 @@ const MainChart = ({ asset, tweets }) => {
         .data(tweets)
         .enter()
         .append("circle")
+        .attr("clip-path", clip)
+
         .attr("cx", (d) => x(new Date(d.created_at)))
         .attr("cy", (d) => {
           const bisect = d3.bisector((d) => new Date(d.Date)).right;
           const i = bisect(price, new Date(d.created_at));
           return y(+price?.[i]?.Close);
         })
+        .attr("class", "tweetcircle")
+        .attr("id", (d) => "tweetid" + d.id)
         .attr("r", 3)
         .style("fill", "red")
         .style("cursor", "pointer")
@@ -215,7 +233,7 @@ const MainChart = ({ asset, tweets }) => {
         })
         .on("click", (event, tweet) => {
           tweetsSvg.selectAll(".tweet-box").remove();
-          addTweetBox(tweet, tweetsSvg);
+          addTweetBox(tweet, tweetsSvg, history);
         });
     };
 

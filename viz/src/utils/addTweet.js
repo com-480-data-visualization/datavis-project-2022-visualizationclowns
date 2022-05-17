@@ -3,7 +3,7 @@ import "./twitter.css";
 
 // TODO: add twitter logo and price change.
 
-export const addTweetBox = (tweet, container) => {
+export const addTweetBox = (tweet, container, location) => {
   const date = new Date(tweet.created_at);
 
   const f = d3.format("3.2~s");
@@ -12,6 +12,11 @@ export const addTweetBox = (tweet, container) => {
     .append("div")
     .attr("id", "id" + tweet.id)
     .attr("class", "tweet-box");
+
+  box.on("click", () => {
+    d3.selectAll(".tweetcircle").attr("r", 3);
+    d3.select("#tweetid" + tweet.id).attr("r", 6);
+  });
 
   const header = box.append("div").attr("class", "tweet-box-header");
 
