@@ -23,12 +23,10 @@ const MainChart = ({ asset, tweets }) => {
       return;
 
     // Get width and height of containers
-    const width =
-      containerRef.current.getBoundingClientRect().width -
-      margin.left -
-      margin.right -
-      468;
-    const height = 400 - margin.top - margin.bottom;
+    const width = graphRef.current.getBoundingClientRect().width;
+    margin.left - margin.right;
+    const height = graphRef.current.getBoundingClientRect().height;
+    -margin.top - margin.bottom;
 
     // Create the graph and tweet svgs
     d3.selectAll(".main-chart-group").remove();
@@ -119,21 +117,26 @@ const MainChart = ({ asset, tweets }) => {
 
         let xDateMin = xb.invert(selection[0]);
         let xDateMax = xb.invert(selection[1]);
-        tweetsSvg.selectAll(".tweet-box").remove();
-        tweets
-          .filter((tweet) => {
-            const tweetDate = new Date(tweet.created_at);
-            const hoverDateMin = new Date(xDateMin);
-            const hoverDateMax = new Date(xDateMax);
+        const data = tweets.filter((tweet) => {
+          const tweetDate = new Date(tweet.created_at);
+          const hoverDateMin = new Date(xDateMin);
+          const hoverDateMax = new Date(xDateMax);
 
-            return (
-              tweetDate.getTime() >= hoverDateMin.getTime() &&
-              tweetDate.getTime() <= hoverDateMax.getTime()
-            );
-          })
-          .forEach((tweet, index) => {
-            addTweetBox(tweet, tweetsSvg);
-          });
+          return (
+            tweetDate.getTime() >= hoverDateMin.getTime() &&
+            tweetDate.getTime() <= hoverDateMax.getTime()
+          );
+        });
+
+        const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
+
+        tweetBoxes.enter().each((tweet) => {
+          addTweetBox(tweet, tweetsSvg);
+        });
+
+        tweetBoxes.exit().call((x) => {
+          x.remove();
+        });
       };
     }
 

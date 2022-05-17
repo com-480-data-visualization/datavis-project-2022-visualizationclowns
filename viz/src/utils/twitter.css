@@ -3,7 +3,7 @@
   flex-direction: column;
   font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
   font-size: 15px;
-  font-weight: bold;
+  /* font-weight: bold; */
   line-height: 24px;
   border-color: #eee #ddd #bbb;
   border-radius: 5px;
@@ -12,7 +12,8 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   margin: 10px 5px;
   padding: 16px;
-  width: 468px;
+  width: 400px;
+  min-width: 400px;
   background-color: white;
 }
 

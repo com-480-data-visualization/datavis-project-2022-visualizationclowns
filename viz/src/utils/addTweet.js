@@ -8,7 +8,10 @@ export const addTweetBox = (tweet, container) => {
 
   const f = d3.format("3.2~s");
 
-  const box = container.append("div").attr("class", "tweet-box");
+  const box = container
+    .append("div")
+    .attr("id", "id" + tweet.id)
+    .attr("class", "tweet-box");
 
   const header = box.append("div").attr("class", "tweet-box-header");
 
