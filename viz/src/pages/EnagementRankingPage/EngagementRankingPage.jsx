@@ -1,14 +1,15 @@
 import React from "react";
+import EngagementRanking from "../../components/engagementRanking/EngagementRanking";
 import Layout from "../../components/layout/Layout";
 
-const EngagementRanking = ({ tweets }) => {
+const EngagementRankingPage = ({ tweets }) => {
   return (
     <Layout>
-      <section>
-        <EngagementRanking tweets={tweets?.[selectedDataset]} />
+      <section id="disable">
+        <EngagementRanking tweets={tweets} />
       </section>
     </Layout>
   );
 };
 
-export default EngagementRanking;
+export default EngagementRankingPage;

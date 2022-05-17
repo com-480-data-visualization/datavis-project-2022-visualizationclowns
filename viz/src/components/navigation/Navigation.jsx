@@ -7,6 +7,9 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
   const sections = [
     { name: "Start", link: "/" },
     { name: "Main", link: "/main" },
+    { name: "Enagement-Ranking", link: "/ranking" },
+    { name: "Tweet-Groups", link: "/groups" },
+    { name: "Conclusion", link: "/conclusion" },
   ];
 
   const location = useLocation();

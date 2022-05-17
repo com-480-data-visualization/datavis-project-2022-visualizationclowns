@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import css from "./App.module.css";
 import Navigation from "./components/navigation/Navigation";
 import * as d3 from "d3";
-import EngagementRanking from "./pages/EnagementRankingPage/EngagementRankingPage";
+import EngagementRankingPage from "./pages/EnagementRankingPage/EngagementRankingPage";
 import Introduction from "./pages/IntroductionPage/IntroductionPage";
 import { Route, Routes } from "react-router-dom";
 import MainChartPage from "./pages/MainChartPage/MainChartPage";
+import TweetGroupsPage from "./pages/TweetGroupsPage/TweetGroupsPage";
+import ConclusionPage from "./pages/ConclusionPage/ConclusionPage";
 
 function App() {
   const [selectedDataset, setSelectedDataset] = useState("Bitcoin");
@@ -104,7 +106,17 @@ function App() {
               />
             }
           />
-          <Route path="/ranking" element={<EngagementRanking />} />
+          <Route
+            path="/ranking"
+            element={
+              <EngagementRankingPage tweets={tweets?.[selectedDataset]} />
+            }
+          />
+          <Route path="/groups" element={<TweetGroupsPage tweets={tweets} />} />
+          <Route
+            path="/conclusion"
+            element={<ConclusionPage tweets={tweets} />}
+          />
         </Routes>
       </article>
     </div>

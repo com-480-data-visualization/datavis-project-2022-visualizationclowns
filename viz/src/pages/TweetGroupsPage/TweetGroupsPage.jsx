@@ -1,7 +1,8 @@
 import React from "react";
+import GroupedTweetHistogram from "../../components/groupedTweetHistogram/GroupedTweetHistogram";
 import Layout from "../../components/layout/Layout";
 
-const TweetGroups = ({ tweets }) => {
+const TweetGroupsPage = ({ tweets }) => {
   return (
     <Layout>
       <section>
@@ -11,4 +12,4 @@ const TweetGroups = ({ tweets }) => {
   );
 };
 
-export default TweetGroups;
+export default TweetGroupsPage;
