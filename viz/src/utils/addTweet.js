@@ -21,6 +21,7 @@ export const addTweetBox = (tweet, container) => {
   const name = header.append("div").attr("class", "tweet-header-name");
 
   header.append("div").text(d3.format(".2%")(tweet.dayChange));
+
   const statArrow = header
     .append("svg")
     .style("margin-left", "6px")

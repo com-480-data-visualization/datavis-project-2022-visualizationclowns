@@ -39,6 +39,7 @@ const MainChart = ({ asset, tweets }) => {
       .attr("class", "main-chart-group");
 
     const tweetsSvg = d3.select(tweetsRef.current);
+    tweetsSvg.selectChildren().remove();
 
     // Add cliping for clipping lines correclty during zooming
     const clip = svg
