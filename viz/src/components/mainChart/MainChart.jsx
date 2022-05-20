@@ -2,30 +2,27 @@ import React, { useEffect, useRef } from "react";
 import css from "./MainChart.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import uid from "../../utils/uid";
 const MainChart = ({ asset, tweets }) => {
   let price = asset.slice(-1000); //TODO filter based on time?
   const margin = { top: 10, right: 30, bottom: 30, left: 60 };
   const naviagte = useNavigate();
-  const location = useLocation();
 
   const graphRef = useRef(null);
   const tweetsRef = useRef(null);
   const containerRef = useRef(null);
-  const tweet = location.search?.split("=")[1];
-  console.log(location);
 
   // Add rolling average to data
   const n = 50;
   for (let i = 0; i < price.length; i++) {
     price[i].rollingaverage =
       price.slice(i - n, i).reduce((sum, d) => sum + +d.Close, 0) / n;
+  }
+
+  for (let i = 0; i < price.length; i++) {
+    price[i].rollingaverage =
+      i + n >= price.length ? null : price[i + n].rollingaverage;
   }
 
   useEffect(() => {
