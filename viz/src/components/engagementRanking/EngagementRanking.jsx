@@ -101,14 +101,12 @@ const EngagementRanking = ({ tweets }) => {
 
     function brushed(event) {
       const selection = event.selection;
-      console.log(selection);
 
       const hoverMetricMin = y.invert(selection[1]);
       const hoverMetricMax = y.invert(selection[0]);
 
       const data = tweets.filter((tweet) => {
         const tweetMetric = Number(tweet.nlikes);
-        console.log(hoverMetricMin, tweetMetric, hoverMetricMax);
 
         return tweetMetric >= hoverMetricMin && tweetMetric <= hoverMetricMax;
       });
