@@ -5,7 +5,7 @@ import Layout from "../../components/layout/Layout";
 const EngagementRankingPage = ({ tweets }) => {
   return (
     <Layout>
-      <section id="disable">
+      <section style={{ height: "100%" }} id="disable">
         <EngagementRanking tweets={tweets} />
       </section>
     </Layout>

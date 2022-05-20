@@ -114,8 +114,8 @@ const MainChart = ({ asset, tweets }) => {
       d3
         .brushX()
         .extent([
-          [margin.left, -margin.top],
-          [width, height - margin.bottom],
+          [margin.left, margin.top],
+          [width - margin.right, height - margin.bottom],
         ])
         .on("start brush end", brushed(x));
 
