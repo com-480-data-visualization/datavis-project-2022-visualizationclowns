@@ -16,14 +16,13 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
   const navigate = useNavigate();
   const path = location.pathname;
   const [scroll, setScroll] = useState(0);
+  const [index, setIndex] = useState(0);
 
   function onWheel(e) {
     if (e.path.some((tag) => tag.id == "disable")) return;
 
     const delta = e.deltaY / 8;
-    setScroll((prev) =>
-      Math.min(Math.max(prev + delta, 0), (sections.length - 1) * 100)
-    );
+    setScroll((prev) => prev + delta);
   }
 
   useEffect(() => {
@@ -35,8 +34,16 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
   }, []);
 
   useEffect(() => {
-    if (scroll % 100 === 0) {
-      navigate(sections[scroll / 100].link);
+    if (Math.abs(scroll) > 100) {
+      setScroll(0);
+      if (index < sections.length - 1 && scroll > 0) {
+        navigate(sections[index + 1].link);
+        setIndex((prev) => prev + 1);
+      }
+      if (index > 0 && scroll < 0) {
+        navigate(sections[index - 1].link);
+        setIndex((prev) => prev - 1);
+      }
     }
   }, [scroll]);
 
