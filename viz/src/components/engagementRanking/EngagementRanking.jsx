@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import css from "./EngagementRanking.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
+import { useNavigate } from "react-router-dom";
 
 const EngagementRanking = ({ tweets }) => {
   const margin = { top: 10, right: 30, bottom: 30, left: 60 };
   const rankingRef = useRef(null);
   const tweetsRef = useRef(null);
   const containerRef = useRef(null);
+  const naviagte = useNavigate();
 
-  const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
-
-  const sortedTweets = [...tweets].sort(order).slice(0, 10);
+  // const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
+  // const sortedTweets = [...tweets].sort(order).slice(0, 10);
 
   useEffect(() => {
     if (!rankingRef.current) return;
@@ -53,18 +54,19 @@ const EngagementRanking = ({ tweets }) => {
     svg.append("g").call(yAxis, y);
 
     // Add the brushing
-    const brush = (y) =>
+    const brush = (x) =>
       d3
         .brushY()
         .extent([
           [margin.left, -margin.top],
           [width - margin.right, height - margin.bottom],
         ])
-        .on("start brush end", brushed(x));
+        .on("start brush end", brushed);
 
-    const brushg = svg.append("g").attr("class", "brush").call(brush(y));
+    svg.append("g").attr("class", "brush").call(brush(x));
 
-    const tweetsSvg = d3.select(tweetsRef.current).selectAll("div");
+    const tweetsSvg = d3.select(tweetsRef.current);
+    tweetsSvg.selectChildren().remove();
 
     // Plotting the relevant tweets
     const tweetsdots = (x) => {
@@ -97,33 +99,29 @@ const EngagementRanking = ({ tweets }) => {
 
     tweetsdots(x);
 
-    function brushed(xb) {
-      return (event) => {
-        const selection = event.selection;
+    function brushed(event) {
+      const selection = event.selection;
+      console.log(selection);
 
-        let xDateMin = xb.invert(selection[0]);
-        let xDateMax = xb.invert(selection[1]);
-        const data = tweets.filter((tweet) => {
-          const tweetDate = new Date(tweet.created_at);
-          const hoverDateMin = new Date(xDateMin);
-          const hoverDateMax = new Date(xDateMax);
+      const hoverMetricMin = y.invert(selection[1]);
+      const hoverMetricMax = y.invert(selection[0]);
 
-          return (
-            tweetDate.getTime() >= hoverDateMin.getTime() &&
-            tweetDate.getTime() <= hoverDateMax.getTime()
-          );
-        });
+      const data = tweets.filter((tweet) => {
+        const tweetMetric = Number(tweet.nlikes);
+        console.log(hoverMetricMin, tweetMetric, hoverMetricMax);
 
-        const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
+        return tweetMetric >= hoverMetricMin && tweetMetric <= hoverMetricMax;
+      });
 
-        tweetBoxes.enter().each((tweet) => {
-          addTweetBox(tweet, tweetsSvg, naviagte);
-        });
+      const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
 
-        tweetBoxes.exit().call((x) => {
-          x.remove();
-        });
-      };
+      tweetBoxes.enter().each((tweet) => {
+        addTweetBox(tweet, tweetsSvg, naviagte);
+      });
+
+      tweetBoxes.exit().call((x) => {
+        x.remove();
+      });
     }
   }, [tweets]);
 
