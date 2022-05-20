@@ -1,4 +1,4 @@
-import * as d3 from "https://unpkg.com/d3?module";
+import * as d3 from "d3";
 import "./twitter.css";
 
 // TODO: add twitter logo and price change.
