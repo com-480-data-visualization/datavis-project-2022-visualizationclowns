@@ -25,6 +25,11 @@ const MainChart = ({ asset, tweets }) => {
       i + n >= price.length ? null : price[i + n].rollingaverage;
   }
 
+  for (let i = 1; i < price.length; i++) {
+    price[i].color =
+      price[i].rollingaverage > price[i - 1].rollingaverage ? "green" : "red";
+  }
+
   useEffect(() => {
     if (!graphRef.current || !tweetsRef.current || !containerRef.current)
       return;
@@ -77,7 +82,8 @@ const MainChart = ({ asset, tweets }) => {
     function zoomed(event) {
       const xz = event.transform.rescaleX(x);
       linepath.attr("d", line(price, xz));
-      avpath.attr("d", avline(price, xz));
+      grad.attr("offset", (d) => xz(new Date(d.Date)) / width);
+      avpath.attr("d", avline(price, xz)).attr("stroke", gradient);
       tweetsdots(xz);
       brushg.attr("class", "brush").call(d3.brush().clear).call(brush(xz));
       gx.call(xAxis, xz);
@@ -163,9 +169,23 @@ const MainChart = ({ asset, tweets }) => {
       .datum(price)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2)
       .attr("pointer-events", "none")
       .attr("d", (data) => line(data, x));
+
+    // Making the gradient for the average line
+    const gradient = uid("gradient");
+    const grad = svg
+      .append("linearGradient")
+      .attr("id", gradient.id)
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", 0)
+      .attr("x2", width)
+      .selectAll("stop")
+      .data(price)
+      .join("stop")
+      .attr("offset", (d) => x(new Date(d.Date)) / width)
+      .attr("stop-color", (d) => d.color);
 
     // Plotting the running average-line
     const avline = (data, x) =>
@@ -185,8 +205,8 @@ const MainChart = ({ asset, tweets }) => {
       .attr("clip-path", clip)
       .datum(price)
       .attr("fill", "none")
-      .attr("stroke", "green")
-      .attr("stroke-width", 1.5)
+      .attr("stroke", gradient)
+      .attr("stroke-width", 2)
       .attr("pointer-events", "none")
       .attr("d", (data) => avline(data, x));
 
