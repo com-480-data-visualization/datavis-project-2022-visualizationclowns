@@ -15,3 +15,13 @@
   max-width: 1280px;
   width: 100%;
 }
+
+.container {
+  background-color: var(--main-color);
+  min-height: 100vh;
+  transition: all 1s ease-in-out;
+}
+
+.header {
+  background-color: var(--main-color);
+}
