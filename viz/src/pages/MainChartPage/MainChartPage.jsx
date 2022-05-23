@@ -7,7 +7,7 @@ import css from "./MainChartPage.module.css";
 const MainChartPage = ({ tweets, asset }) => {
   return (
     <Layout>
-      <h3 className={css.title}>Elon musk driving or riding trends?</h3>
+      <h3 className={css.title}>Elon Musk driving or riding trends?</h3>
       <MainChart tweets={tweets} asset={asset} />
       {/* <Paragraph>
           Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Mattis
