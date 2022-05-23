@@ -81,44 +81,75 @@ function App() {
     })();
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    switch (selectedDataset) {
+      case "Bitcoin":
+        root.style.setProperty("--main-color", "#d17c54");
+        root.style.setProperty("--text-color", "white");
+        root.style.setProperty("--header-color", "#d97126");
+        break;
+
+      case "Dogecoin":
+        root.style.setProperty("--main-color", "#e4b867");
+        root.style.setProperty("--text-color", "black");
+        root.style.setProperty("--header-color", "#d99a26");
+        break;
+      case "Tesla":
+        root.style.setProperty("--main-color", "#b65457");
+        root.style.setProperty("--text-color", "white");
+        root.style.setProperty("--header-color", "#a14548");
+        break;
+
+      default:
+        break;
+    }
+  }, [selectedDataset]);
+
   if (!tweets || !datasets || !allTweets) return <div>Loading...</div>;
 
   return (
     <div className="App">
-      <header className={css.header}>
-        <Navigation
-          selectedDataset={selectedDataset}
-          setSelectedDataset={setSelectedDataset}
-        />
-      </header>
-      <article className={css.content}>
-        <Routes>
-          <Route
-            path="/"
-            element={<Introduction nTweets={allTweets.length} />}
+      <div className={css.container}>
+        <header className={css.header}>
+          <Navigation
+            selectedDataset={selectedDataset}
+            setSelectedDataset={setSelectedDataset}
           />
-          <Route
-            path="/main"
-            element={
-              <MainChartPage
-                tweets={tweets?.[selectedDataset]}
-                asset={datasets?.[selectedDataset]}
-              />
-            }
-          />
-          <Route
-            path="/ranking"
-            element={
-              <EngagementRankingPage tweets={tweets?.[selectedDataset]} />
-            }
-          />
-          <Route path="/groups" element={<TweetGroupsPage tweets={tweets} />} />
-          <Route
-            path="/conclusion"
-            element={<ConclusionPage tweets={tweets} />}
-          />
-        </Routes>
-      </article>
+        </header>
+        <article className={css.content}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Introduction nTweets={allTweets.length} />}
+            />
+            <Route
+              path="/main"
+              element={
+                <MainChartPage
+                  tweets={tweets?.[selectedDataset]}
+                  asset={datasets?.[selectedDataset]}
+                />
+              }
+            />
+            <Route
+              path="/ranking"
+              element={
+                <EngagementRankingPage tweets={tweets?.[selectedDataset]} />
+              }
+            />
+            <Route
+              path="/groups"
+              element={<TweetGroupsPage tweets={tweets} />}
+            />
+            <Route
+              path="/conclusion"
+              element={<ConclusionPage tweets={tweets} />}
+            />
+          </Routes>
+        </article>
+      </div>
     </div>
   );
 }

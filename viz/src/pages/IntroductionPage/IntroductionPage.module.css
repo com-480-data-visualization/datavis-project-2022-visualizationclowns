@@ -8,11 +8,13 @@
 .title {
   font-size: 4vw;
   font-weight: bold;
+  color: var(--text-color);
 }
 
 .introductionText {
   font-size: 1.5vw;
   text-align: justify;
+  color: var(--text-color);
 }
 
 .content {

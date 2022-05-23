@@ -5,7 +5,8 @@
   height: 64px;
   align-items: center;
   position: fixed;
-  background-color: white;
+  background-color: var(--header-color);
+  transition: all 1s ease-in-out;
 }
 
 .content {
@@ -19,6 +20,7 @@
   display: flex;
   width: 300px;
   justify-content: space-around;
+  color: var(--text-color);
 }
 
 .radioButtons > div {
@@ -39,7 +41,7 @@
 
 .navBall {
   border-radius: 50%;
-  background-color: black;
+  background-color: var(--text-color);
   opacity: 0.6;
   height: 16px;
   width: 16px;

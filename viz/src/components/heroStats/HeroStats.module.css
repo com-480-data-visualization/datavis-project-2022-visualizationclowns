@@ -7,7 +7,7 @@
 .counter {
   transition: --num 3s;
   counter-reset: num var(--num);
-  color: #19191a;
+  color: var(--text-color);
   font-weight: bold;
 }
 
@@ -16,7 +16,8 @@
 }
 
 .suffix {
-  color: #2b2b2b;
+  color: var(--text-color);
+  opacity: 0.8;
   margin-top: 6px;
   font-weight: lighter;
 }
@@ -28,6 +29,7 @@
 }
 
 .container > span {
-  color: #2b2b2b;
+  color: var(--text-color);
   margin-bottom: -8px;
+  opacity: 0.9;
 }
