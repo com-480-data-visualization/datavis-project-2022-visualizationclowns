@@ -86,20 +86,20 @@ function App() {
 
     switch (selectedDataset) {
       case "Bitcoin":
-        root.style.setProperty("--main-color", "#d17c54");
-        root.style.setProperty("--text-color", "white");
-        root.style.setProperty("--header-color", "#d97126");
+        root.style.setProperty("--main-color", "#d17c5445");
+        root.style.setProperty("--text-color", "#1c1c1c");
+        root.style.setProperty("--header-color", "#d3732e61");
         break;
 
       case "Dogecoin":
-        root.style.setProperty("--main-color", "#e4b867");
-        root.style.setProperty("--text-color", "black");
-        root.style.setProperty("--header-color", "#d99a26");
+        root.style.setProperty("--main-color", "#e4b86760");
+        root.style.setProperty("--text-color", "#1c1c1c");
+        root.style.setProperty("--header-color", "#d99a266e");
         break;
       case "Tesla":
-        root.style.setProperty("--main-color", "#b65457");
-        root.style.setProperty("--text-color", "white");
-        root.style.setProperty("--header-color", "#a14548");
+        root.style.setProperty("--main-color", "#b6545768");
+        root.style.setProperty("--text-color", "#1c1c1c");
+        root.style.setProperty("--header-color", "#a1454858");
         break;
 
       default:

@@ -9,12 +9,14 @@
   font-size: 4vw;
   font-weight: bold;
   color: var(--text-color);
+  font-weight: 700;
 }
 
 .introductionText {
   font-size: 1.5vw;
   text-align: justify;
   color: var(--text-color);
+  font-weight: 400;
 }
 
 .content {
