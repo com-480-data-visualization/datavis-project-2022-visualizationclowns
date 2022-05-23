@@ -96,12 +96,15 @@ const MainChart = ({ asset, tweets }) => {
       .range([margin.left, width - margin.right]);
 
     const xAxis = (g, x) =>
-      g.attr("transform", `translate(0,${height - margin.bottom})`).call(
-        d3
-          .axisBottom(x)
-          .ticks(width / 80)
-          .tickSizeOuter(0)
-      );
+      g
+        .style("font-size", "18px")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(
+          d3
+            .axisBottom(x)
+            .ticks(width / 170)
+            .tickSizeOuter(0)
+        );
 
     const gx = svg.append("g").call(xAxis, x);
 
@@ -110,8 +113,13 @@ const MainChart = ({ asset, tweets }) => {
       .domain([0, d3.max(price, (d) => +d.Close)])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g, y) =>
-      g.attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y));
+    const yAxis = (g, y) => {
+      g.attr("transform", `translate(${margin.left},0)`)
+        .style("font-size", "18px")
+        .call(d3.axisLeft(y).ticks(5).tickSize(2));
+
+      g.selectAll("g.tick text").attr("transform", "rotate(5)");
+    };
 
     svg.append("g").call(yAxis, y);
 
