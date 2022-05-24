@@ -46,7 +46,6 @@ export const addChart = (Y, svg, container) => {
       return height - margin.bottom - y(Y[i]);
     })
     .on("mouseover", function (d, i) {
-      console.log(i);
       d3.select(this).attr("style", "fill: darkblue;");
       const xPosition = parseFloat(d3.select(this).attr("x"));
       const yPosition = parseFloat(d3.select(this).attr("y"));
