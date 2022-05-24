@@ -25,6 +25,7 @@ const MainChart = ({ asset, tweets }) => {
       i + n >= price.length ? null : price[i + n].rollingaverage;
   }
 
+  price[0].color = "green";
   for (let i = 1; i < price.length; i++) {
     price[i].color =
       price[i].rollingaverage > price[i - 1].rollingaverage ? "green" : "red";
@@ -206,7 +207,7 @@ const MainChart = ({ asset, tweets }) => {
           } catch (e) {
             return y(0);
           }
-        })(data);
+        })(data.slice(0, -n));
 
     const avpath = svg
       .append("path")

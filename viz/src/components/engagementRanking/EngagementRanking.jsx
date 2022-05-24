@@ -64,7 +64,7 @@ const EngagementRanking = ({ tweets }) => {
         d3
           .brush()
           .extent([
-            [margin.left, margin.top],
+            [margin.left, 0],
             [width - margin.right, height - margin.bottom],
           ])
           .on("start brush", brushed)
