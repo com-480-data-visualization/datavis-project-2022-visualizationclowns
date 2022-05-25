@@ -28,12 +28,16 @@ const EngagementRanking = ({ tweets }) => {
       .attr("class", "ranking-chart-group");
 
     // Add x and y scales and axis
+    const maxChange = d3.max(tweets, (d) => d.dayChange);
+    const minChange = d3.min(tweets, (d) => d.dayChange);
+    const maxExtent =
+      Math.ceil(Math.max(Math.abs(maxChange), Math.abs(minChange)) * 10) / 10;
     const x = d3
-      .scaleTime()
-      .domain(d3.extent(tweets, (d) => new Date(d.created_at)))
+      .scaleLinear()
+      .domain([-maxExtent, maxExtent])
       .range([margin.left, width - margin.right]);
 
-    const xAxis = (g, x) =>
+    const xAxis = (g) =>
       g.attr("transform", `translate(0,${height - margin.bottom})`).call(
         d3
           .axisBottom(x)
@@ -41,74 +45,76 @@ const EngagementRanking = ({ tweets }) => {
           .tickSizeOuter(0)
       );
 
-    const gx = svg.append("g").call(xAxis, x);
-
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(tweets, (d) => +d.nlikes)])
+      .domain([1, d3.max(tweets, (d) => +d.nlikes)])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g, y) =>
+    const yAxis = (g) =>
       g.attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y));
 
-    svg.append("g").call(yAxis, y);
+    svg.append("g").call(xAxis);
+    svg.append("g").call(yAxis);
 
     // Add the brushing
-    const brush = (x) =>
-      d3
-        .brushY()
-        .extent([
-          [margin.left, margin.top],
-          [width - margin.right, height - margin.bottom],
-        ])
-        .on("start brush end", brushed);
-
-    svg.append("g").attr("class", "brush").call(brush(x));
+    svg
+      .append("g")
+      .attr("class", "brush")
+      .call(
+        d3
+          .brush()
+          .extent([
+            [margin.left, 0],
+            [width - margin.right, height - margin.bottom],
+          ])
+          .on("start brush", brushed)
+      );
 
     const tweetsSvg = d3.select(tweetsRef.current);
     tweetsSvg.selectChildren().remove();
 
     // Plotting the relevant tweets
-    const tweetsdots = (x) => {
-      svg.selectAll("circle").remove();
-      svg
-        .selectAll("circle")
-        .data(tweets)
-        .enter()
-        .append("circle")
-        // .attr("clip-path", clip)
-        .attr("cx", (d) => x(new Date(d.created_at)))
-        .attr("cy", (d) => y(d.nlikes))
-        .attr("class", "tweetcircle")
-        .attr("id", (d) => "tweetid" + d.id)
-        .attr("r", 3)
-        .style("fill", "red")
-        .style("cursor", "pointer")
-        // these have to be functions to use the this keyword
-        .on("mouseover", function () {
-          d3.select(this).transition().duration("100").attr("r", 6);
-        })
-        .on("mouseout", function () {
-          d3.select(this).transition().duration("100").attr("r", 3);
-        })
-        .on("click", (event, tweet) => {
-          tweetsSvg.selectAll(".tweet-box").remove();
-          addTweetBox(tweet, tweetsSvg, history);
-        });
-    };
+    svg.selectAll("circle").remove();
+    svg
+      .selectAll("circle")
+      .data(tweets)
+      .enter()
+      .append("circle")
+      .attr("cx", (d) => x(d.dayChange))
+      .attr("cy", (d) => y(d.nlikes))
+      .attr("class", "tweetcircle")
+      .attr("id", (d) => "tweetid" + d.id)
+      .attr("r", 3)
+      .style("fill", "red")
+      .style("cursor", "pointer")
+      // these have to be functions to use the this keyword
+      .on("mouseover", function () {
+        d3.select(this).transition().duration("100").attr("r", 6);
+      })
+      .on("mouseout", function () {
+        d3.select(this).transition().duration("100").attr("r", 3);
+      })
+      .on("click", (event, tweet) => {
+        tweetsSvg.selectAll(".tweet-box").remove();
+        addTweetBox(tweet, tweetsSvg, history);
+      });
 
-    tweetsdots(x);
-
-    function brushed(event) {
-      const selection = event.selection;
-
-      const hoverMetricMin = y.invert(selection[1]);
-      const hoverMetricMax = y.invert(selection[0]);
+    function brushed({ selection: [[x0, y0], [x1, y1]] }) {
+      const ymin = y.invert(y1);
+      const ymax = y.invert(y0);
+      const xmax = x.invert(x1);
+      const xmin = x.invert(x0);
 
       const data = tweets.filter((tweet) => {
         const tweetMetric = Number(tweet.nlikes);
+        const tweetChange = Number(tweet.dayChange);
 
-        return tweetMetric >= hoverMetricMin && tweetMetric <= hoverMetricMax;
+        return (
+          tweetMetric >= ymin &&
+          tweetMetric <= ymax &&
+          tweetChange >= xmin &&
+          tweetChange <= xmax
+        );
       });
 
       const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
