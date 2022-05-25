@@ -25,11 +25,28 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
     setScroll((prev) => prev + delta);
   }
 
+  function onKeyPress(e) {
+    if (e.key === "ArrowLeft") {
+      setScroll((prev) => prev - 105);
+    }
+    if (e.key === "ArrowRight") {
+      setScroll((prev) => prev + 105);
+    }
+  }
+
   useEffect(() => {
     window.addEventListener("wheel", onWheel);
 
     return () => {
       window.removeEventListener("wheel", onWheel);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyPress);
     };
   }, []);
 
