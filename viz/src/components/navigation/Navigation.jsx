@@ -81,11 +81,12 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
           ))}
         </section>
         <section className={css.navigationBalls}>
-          {sections.map((section) => (
+          {sections.map((section, idx) => (
             <div
               onClick={() => {
                 navigate(section.link);
                 setScroll(0);
+                setIndex(idx);
               }}
               style={{ opacity: section.link === path ? 0.8 : 0.6 }}
               key={section.name}
