@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import MainChartPage from "./pages/MainChartPage/MainChartPage";
 import TweetGroupsPage from "./pages/TweetGroupsPage/TweetGroupsPage";
 import ConclusionPage from "./pages/ConclusionPage/ConclusionPage";
+import Spinner from "./components/spinner/Spinner";
 
 function App() {
   const [selectedDataset, setSelectedDataset] = useState("Bitcoin");
@@ -106,7 +107,12 @@ function App() {
     }
   }, [selectedDataset]);
 
-  if (!tweets || !datasets || !allTweets) return <div>Loading...</div>;
+  if (!tweets || !datasets || !allTweets)
+    return (
+      <div className={css.loadingContainer}>
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className="App">
