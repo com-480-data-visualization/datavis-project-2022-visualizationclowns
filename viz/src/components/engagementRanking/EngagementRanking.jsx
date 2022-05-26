@@ -129,7 +129,7 @@ const EngagementRanking = ({ tweets }) => {
               [margin.left, 0],
               [width - margin.right, height - margin.bottom],
             ])
-            .on("start brush", brushed)
+            .on("start brush", debounce(brushed))
         );
     }
 
