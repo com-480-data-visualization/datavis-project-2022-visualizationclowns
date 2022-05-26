@@ -14,8 +14,8 @@ export const addTweetBox = (tweet, container, location) => {
     .attr("class", "tweet-box");
 
   box.on("click", () => {
-    d3.selectAll(".tweetcircle").attr("r", 3);
-    d3.select("#tweetid" + tweet.id).attr("r", 6);
+    d3.selectAll(".tweetcircle").attr("r", 5);
+    d3.select("#tweetid" + tweet.id).attr("r", 9);
   });
 
   const header = box.append("div").attr("class", "tweet-box-header");

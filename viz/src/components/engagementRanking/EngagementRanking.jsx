@@ -94,15 +94,16 @@ const EngagementRanking = ({ tweets }) => {
       .attr("cy", (d) => y(d.nlikes))
       .attr("class", "tweetcircle")
       .attr("id", (d) => "tweetid" + d.id)
-      .attr("r", 3)
-      .style("fill", "red")
+      .attr("r", 5)
+      .style("fill", "black")
+      .style("opacity", 0.6)
       .style("cursor", "pointer")
       // these have to be functions to use the this keyword
       .on("mouseover", function () {
-        d3.select(this).transition().duration("100").attr("r", 6);
+        d3.select(this).transition().duration("100").attr("r", 9);
       })
       .on("mouseout", function () {
-        d3.select(this).transition().duration("100").attr("r", 3);
+        d3.select(this).transition().duration("100").attr("r", 5);
       })
       .on("click", (event, tweet) => {
         tweetsSvg.selectAll(".tweet-box").remove();
