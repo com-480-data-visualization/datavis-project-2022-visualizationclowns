@@ -29,11 +29,29 @@ export const addChart = (Y, svg, container) => {
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y));
 
-  svg
+  
+    svg
+    .append('g')
+    .append('pattern')
+      .attr('id', 'diagonalHatch')
+      .attr('patternUnits', 'userSpaceOnUse')
+      .attr('width', 4)
+      .attr('height', 4)
+    .append('image')
+    .attr("href", "http://localhost:3000/src/components/groupedTweetHistogram/download.png")
+    .attr('width', 4)
+    .attr('height', 4)
+    .attr("x", 0)
+    .attr("y", 0)
+
+
+
+    svg
     .selectAll(".bar")
     .data(I)
     .enter()
     .append("rect")
+    .attr('fill', 'url(#diagonalHatch)')
     .attr("class", "bar")
     .attr("x", function (i) {
       return x(X[i]);
@@ -44,26 +62,25 @@ export const addChart = (Y, svg, container) => {
     .attr("width", x.bandwidth())
     .attr("height", function (i) {
       return height - margin.bottom - y(Y[i]);
-    })
-    .on("mouseover", function (d, i) {
-      console.log(i);
-      d3.select(this).attr("style", "fill: darkblue;");
-      const xPosition = parseFloat(d3.select(this).attr("x"));
-      const yPosition = parseFloat(d3.select(this).attr("y"));
-      svg
-        .append("text")
-        .attr("id", "tooltip")
-        .attr("x", xPosition + 25)
-        .attr("y", yPosition + 16)
-        .attr("text-anchor", "middle")
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "11px")
-        .attr("font-weight", "bold")
-        .attr("fill", "white")
-        .text(Y[i]);
-    })
-    .on("mouseout", function (d, i) {
-      d3.select(this).attr("style", "outline: thin solid clear;");
-      d3.select("#tooltip").remove();
-    });
+    }).on("mouseover", function (d, i) {
+          console.log(i);
+          d3.select(this).attr("style", "fill: darkblue;");
+          const xPosition = parseFloat(d3.select(this).attr("x"));
+          const yPosition = parseFloat(d3.select(this).attr("y"));
+          svg
+            .append("text")
+            .attr("id", "tooltip")
+            .attr("x", xPosition + 25)
+            .attr("y", yPosition + 16)
+            .attr("text-anchor", "middle")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("font-weight", "bold")
+            .attr("fill", "white")
+            .text(Y[i]);
+        })
+        .on("mouseout", function (d, i) {
+          d3.select(this).attr("style", "outline: thin solid clear;");
+          d3.select("#tooltip").remove();
+        });
 };
