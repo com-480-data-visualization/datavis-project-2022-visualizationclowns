@@ -2,6 +2,8 @@
   font-size: 2vw;
   font-weight: bold;
   color: var(--text-color);
+  transition: transform 0.7s ease-in-out, opacity 1.7s ease-in;
+  position: relative;
 }
 
 .texts {
