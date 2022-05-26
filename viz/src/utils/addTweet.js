@@ -119,4 +119,11 @@ export const addTweetBox = (tweet, container, location) => {
     .append("span")
     .text("Quote Tweets");
   metrics.append("div").text(f(tweet.nlikes)).append("span").text("Likes");
+
+  metrics
+    .append("div")
+    .append("a")
+    .text("Link")
+    .attr("href", `https://twitter.com/elonmusk/status/${tweet.id}?lang=en`)
+    .attr("target", "_blank");
 };
