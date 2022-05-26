@@ -12,8 +12,10 @@ const Introduction = ({ nTweets }) => {
   useEffect(() => {
     if (titleRef.current) {
       const title = d3.select(titleRef.current);
-      title.style("transform", `translate(100px,0)`);
-      title.style("opacity", 1);
+      setTimeout(() => {
+        title.style("transform", `translate(100px,0)`);
+        title.style("opacity", 1);
+      }, 100);
     }
     if (textRef.current) {
       const text = d3.select(textRef.current);

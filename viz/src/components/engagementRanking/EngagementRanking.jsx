@@ -3,6 +3,7 @@ import css from "./EngagementRanking.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
 import { useNavigate } from "react-router-dom";
+import debounce from "../../utils/debounce";
 
 const EngagementRanking = ({ tweets }) => {
   const margin = { top: 10, right: 30, bottom: 30, left: 60 };
@@ -38,20 +39,29 @@ const EngagementRanking = ({ tweets }) => {
       .range([margin.left, width - margin.right]);
 
     const xAxis = (g) =>
-      g.attr("transform", `translate(0,${height - margin.bottom})`).call(
-        d3
-          .axisBottom(x)
-          .ticks(width / 80)
-          .tickSizeOuter(0)
-      );
+      g
+        .style("font-size", "14px")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(
+          d3
+            .axisBottom(x)
+            .ticks(width / 80)
+            .tickSizeOuter(0)
+            .tickFormat(d3.format(".0%"))
+        );
 
     const y = d3
       .scaleLinear()
       .domain([1, d3.max(tweets, (d) => +d.nlikes)])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g) =>
-      g.attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y));
+    const yAxis = (g) => {
+      g.style("font-size", "14px")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y).ticks(5));
+
+      g.selectAll("g.tick text").attr("transform", "rotate(5)");
+    };
 
     svg.append("g").call(xAxis);
     svg.append("g").call(yAxis);
@@ -67,7 +77,7 @@ const EngagementRanking = ({ tweets }) => {
             [margin.left, 0],
             [width - margin.right, height - margin.bottom],
           ])
-          .on("start brush", brushed)
+          .on("start brush", debounce(brushed, 50))
       );
 
     const tweetsSvg = d3.select(tweetsRef.current);
@@ -97,6 +107,7 @@ const EngagementRanking = ({ tweets }) => {
       .on("click", (event, tweet) => {
         tweetsSvg.selectAll(".tweet-box").remove();
         addTweetBox(tweet, tweetsSvg, history);
+        d3.select(".scroll-text").style("display", "none");
       });
 
     function brushed({ selection: [[x0, y0], [x1, y1]] }) {
@@ -117,7 +128,11 @@ const EngagementRanking = ({ tweets }) => {
         );
       });
 
-      const tweetBoxes = tweetsSvg.selectAll(".tweet-box").data(data);
+      const tweetBoxes = tweetsSvg
+        .selectAll(".tweet-box")
+        .data(data, function (d) {
+          return d?.id;
+        });
 
       tweetBoxes.enter().each((tweet) => {
         addTweetBox(tweet, tweetsSvg, naviagte);
@@ -129,12 +144,28 @@ const EngagementRanking = ({ tweets }) => {
     }
   }, [tweets]);
 
+  // const scrollRight = () => {
+  //   if (!tweetsRef.current) return;
+
+  //   let tweetNode = (d3.select(tweetsRef.current).node().scrollLeft += 500);
+  // };
+
   return (
     <article ref={containerRef} className={css.container}>
       <section className={css.ranking}>
         <svg height="100%" width="100%" ref={rankingRef} />
       </section>
       <section id="disable" className={css.tweets} ref={tweetsRef} />
+      {/* <div
+        style={{ userSelect: "none" }}
+        onClick={(e) => {
+          e.preventDefault();
+          scrollRight();
+        }}
+        className={[css.scrollText, "scroll-text"].join(" ")}
+      >
+        Scroll right
+      </div> */}
     </article>
   );
 };

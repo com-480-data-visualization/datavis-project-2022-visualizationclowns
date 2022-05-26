@@ -18,8 +18,39 @@
   overflow-x: auto;
   align-items: flex-start;
   width: 90vw;
+  position: relative;
+  scroll-behavior: smooth;
 }
 
 .tweets::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+  }
+
+  50% {
+    transform: translateX(30px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.scrollText {
+  position: absolute;
+  font-size: 24px;
+  font-weight: lighter;
+  animation: bounce 1s ease-in-out infinite;
+  bottom: -45px;
+  right: 0;
+  /* display: none; */
+}
+
+.scrollText::after {
+  content: "    ›";
+  font-size: 24px;
 }
