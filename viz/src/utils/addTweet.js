@@ -54,6 +54,38 @@ export const addTweetBox = (tweet, container, location) => {
       .attr("fill", "green");
   }
 
+  const priceChangeText = header
+    .append("div")
+    .style("font-weight", "lighter")
+    .style("position", "relative")
+    .style("left", "-6px")
+    .style("cursor", "default")
+    .text("Asset price change")
+    .on("mouseover", function () {
+      d3.select(this).selectChildren(".tooltip").style("opacity", 1);
+    })
+    .on("mouseout", function () {
+      d3.select(this).selectChildren(".tooltip").style("opacity", 0);
+    });
+
+  priceChangeText
+    .append("div")
+    .attr("class", "tooltip")
+    .style("transition", "opacity 0.2s ease-in-out")
+    .style("opacity", 0)
+    .style("pointer-events", "none")
+    .style("width", "170px")
+    .style("height", "75px")
+    .style("padding", "16px")
+    .style("border-radius", "4px")
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("top", "25px")
+    .style("left", "-50px")
+    .style("z-index", "11")
+    .style("box-shadow", "5px 5px 22px -3px rgba(0,0,0,0.27)")
+    .text("Price change in selected asset 48 hours after day of tweet.");
+
   name
     .append("div")
     .attr("class", "tweet-name")
