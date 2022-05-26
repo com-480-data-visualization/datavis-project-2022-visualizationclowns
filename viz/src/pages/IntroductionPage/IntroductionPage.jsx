@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import css from "./IntroductionPage.module.css";
 import { HeroStats } from "../../components/heroStats/HeroStats";
 import Paragraph from "../../components/paragraph/Paragraph";
 import * as d3 from "d3";
+import Instruction from "../../components/instruction/Instruction";
 
 const Introduction = ({ nTweets }) => {
   const titleRef = useRef(null);
   const textRef = useRef(null);
+  const [showNavHint, setShowNavHint] = useState(false);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -24,6 +26,9 @@ const Introduction = ({ nTweets }) => {
         text.style("opacity", 1);
       }, 200);
     }
+    setTimeout(() => {
+      setShowNavHint(true);
+    }, 5000);
   }, []);
 
   return (
@@ -56,22 +61,24 @@ const Introduction = ({ nTweets }) => {
           ref={textRef}
         >
           <Paragraph className={css.introductionText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae
-            congue eu consequat ac felis donec et. Gravida neque convallis a
-            cras semper auctor. Egestas congue quisque egestas diam in arcu
-            cursus. mi. <br />
+            Elon Musk is a cultural phenomena of the twenty-first century and
+            one of the world’s richest individuals. He has founded several
+            incredibly successful companies including PayPal, Tesla, and SpaceX.
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae
-            congue eu consequat ac felis donec et. Gravida neque convallis a
-            cras semper auctor. Egestas congue quisque egestas diam in arcu
-            cursus. Augue mauris augue neque gravida in. Turpis massa sed
-            elementum tempus egestas sed sed risus. Dignissim convallis aenean
-            et tortor at. Tempus urna et pharetra pharetra massa massa ultricies
-            mi.
+            <br />
+            With Elon Musk’s influence and cultural following including almost
+            80M Twitter followers, many of his tweets can have far reaching
+            effects. In recent years, Elon Musk has received criticism from
+            media and regulators accusing him of market manipulation of stocks
+            and cryptocurrencies
+            <br />
+            <br />
+            This visualization aims to illustrate Elon Musk’s tweets impact on
+            the stock and cryptocurrency markets. Follow this journey and
+            investigate Elon Musk’s potential market influence.
           </Paragraph>
         </section>
+        {showNavHint && <Instruction text={"Use arrow keys to navigate ›"} />}
       </article>
     </Layout>
   );

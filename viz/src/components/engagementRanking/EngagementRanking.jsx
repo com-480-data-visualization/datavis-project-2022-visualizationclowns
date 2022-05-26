@@ -156,16 +156,6 @@ const EngagementRanking = ({ tweets }) => {
         <svg height="100%" width="100%" ref={rankingRef} />
       </section>
       <section id="disable" className={css.tweets} ref={tweetsRef} />
-      {/* <div
-        style={{ userSelect: "none" }}
-        onClick={(e) => {
-          e.preventDefault();
-          scrollRight();
-        }}
-        className={[css.scrollText, "scroll-text"].join(" ")}
-      >
-        Scroll right
-      </div> */}
     </article>
   );
 };
