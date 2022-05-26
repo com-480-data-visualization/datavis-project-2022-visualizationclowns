@@ -7,7 +7,7 @@ import uid from "../../utils/uid";
 import debounce from "../../utils/debounce";
 const MainChart = ({ asset, tweets }) => {
   let price = asset.slice(-1000); //TODO filter based on time?
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+  const margin = { top: 10, right: 30, bottom: 50, left: 100 };
   const naviagte = useNavigate();
 
   const graphRef = useRef(null);
@@ -97,7 +97,7 @@ const MainChart = ({ asset, tweets }) => {
       .domain(d3.extent(price, (d) => new Date(d.Date)))
       .range([margin.left, width - margin.right]);
 
-    const xAxis = (g, x) =>
+    const xAxis = (g, x, label) =>
       g
         .style("font-size", "18px")
         .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -106,24 +106,38 @@ const MainChart = ({ asset, tweets }) => {
             .axisBottom(x)
             .ticks(width / 170)
             .tickSizeOuter(0)
-        );
+        )
+        .append('g')
+        .attr('class', 'axis-label')
+        .append('text')
+        .text(label)
+        .attr('x', margin.left + (width - margin.left - margin.right) / 2)
+        .attr('y', 50)
+        .attr('fill', "currentColor");
 
-    const gx = svg.append("g").call(xAxis, x);
+    const gx = svg.append("g").call(xAxis, x, 'Date');
 
     const y = d3
       .scaleLinear()
       .domain([0, d3.max(price, (d) => +d.Close)])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g, y) => {
+    const yAxis = (g, y, label) => {
       g.attr("transform", `translate(${margin.left},0)`)
         .style("font-size", "18px")
-        .call(d3.axisLeft(y).ticks(5).tickSize(2));
+        .call(d3.axisLeft(y).ticks(5).tickSize(2))
+        .append('text')
+        .attr('class', 'axis-label')
+        .text(label)
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -(margin.top + (height - margin.top - margin.bottom) / 2) + 50)
+        .attr('y', -80)
+        .attr('fill', "currentColor");
 
       g.selectAll("g.tick text").attr("transform", "rotate(5)");
     };
 
-    svg.append("g").call(yAxis, y);
+    svg.append("g").call(yAxis, y, 'Price (in USD)');
 
     // Add the brushing
     const brush = (x) =>
@@ -171,11 +185,11 @@ const MainChart = ({ asset, tweets }) => {
     }
 
     // Plotting the price-line
-    const line = (data, x) =>
+    const line = (x) =>
       d3
         .line()
         .x((d) => x(new Date(d.Date)))
-        .y((d) => y(+d.Close))(data);
+        .y((d) => y(+d.Close));
 
     const linepath = svg
       .append("path")
@@ -185,7 +199,7 @@ const MainChart = ({ asset, tweets }) => {
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2)
       .attr("pointer-events", "none")
-      .attr("d", (data) => line(data, x));
+      .attr("d", line(x));
 
     // Making the gradient for the average line
     const gradient = uid("gradient");

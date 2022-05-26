@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import debounce from "../../utils/debounce";
 
 const EngagementRanking = ({ tweets }) => {
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+  const margin = { top: 10, right: 30, bottom: 60, left: 100 };
   const rankingRef = useRef(null);
   const tweetsRef = useRef(null);
   const containerRef = useRef(null);
@@ -51,7 +51,7 @@ const EngagementRanking = ({ tweets }) => {
       .domain([-maxExtent, maxExtent])
       .range([margin.left, width - margin.right]);
 
-    const xAxis = (g) =>
+    const xAxis = (g, label) =>
       g
         .attr("class", "axis")
         .style("font-size", "14px")
@@ -62,25 +62,39 @@ const EngagementRanking = ({ tweets }) => {
             .ticks(width / 80)
             .tickSizeOuter(0)
             .tickFormat(d3.format(".0%"))
-        );
+        ).append('g')
+        .attr('class', 'axis-label')
+        .append('text')
+        .text(label)
+        .attr('x', margin.left + (width - margin.left - margin.right) / 2)
+        .attr('y', 40)
+        .attr('fill', "currentColor");
 
     const y = d3
       .scaleLinear()
       .domain([1, d3.max(tweets, (d) => +d?.[selectedMetric])])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g) => {
+    const yAxis = (g, label) => {
       g.attr("class", "axis")
         .style("font-size", "14px")
         .attr("transform", `translate(${margin.left},0)`)
-        .call(d3.axisLeft(y).ticks(5));
+        .call(d3.axisLeft(y).ticks(5))
+        .append('g')
+        .append('text')
+        .attr('class', 'axis-label')
+        .text(label)
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -(margin.top + (height - margin.top - margin.bottom) / 2) + 10)
+        .attr('y', -80)
+        .attr('fill', "currentColor");
 
       g.selectAll("g.tick text").attr("transform", "rotate(5)");
     };
 
     svg.selectAll(".axis").remove();
-    svg.append("g").call(xAxis);
-    svg.append("g").call(yAxis);
+    svg.append("g").call(xAxis, "Day Change");
+    svg.append("g").call(yAxis, "Tweets");
 
     // Add the brushing
     // console.log(svg.classed("brush"));
