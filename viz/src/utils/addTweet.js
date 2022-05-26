@@ -124,6 +124,6 @@ export const addTweetBox = (tweet, container, location) => {
     .append("div")
     .append("a")
     .text("Link")
-    .attr("href", `https://twitter.com/elonmusk/status/${tweet.id}?lang=en`)
+    .attr("href", `https://twitter.com/elonmusk/status/${tweet.id}`)
     .attr("target", "_blank");
 };
