@@ -25,7 +25,12 @@ const EngagementRanking = ({ tweets }) => {
 
   useEffect(() => {
     if (!rankingRef.current) return;
-    // d3.selectAll(".ranking-chart-group").remove();
+    const svg = d3.select(rankingRef.current);
+    svg.selectAll(".tweetcircle").remove();
+  }, [tweets]);
+
+  useEffect(() => {
+    if (!rankingRef.current) return;
     const width = rankingRef.current.getBoundingClientRect().width;
     margin.left - margin.right;
     const height = rankingRef.current.getBoundingClientRect().height;
@@ -209,12 +214,6 @@ const EngagementRanking = ({ tweets }) => {
       })
       .style("opacity", 0.6);
   }, [selectedMetric]);
-
-  // const scrollRight = () => {
-  //   if (!tweetsRef.current) return;
-
-  //   let tweetNode = (d3.select(tweetsRef.current).node().scrollLeft += 500);
-  // };
 
   return (
     <article ref={containerRef} className={css.container}>
