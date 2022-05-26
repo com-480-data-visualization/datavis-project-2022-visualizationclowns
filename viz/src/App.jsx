@@ -63,7 +63,9 @@ function App() {
           };
         }),
         Tesla: tweetsDataset
-          .filter(filter_regex(`((tesla.*(stock|private))|(tsla))`))
+          .filter(
+            filter_regex(`((tesla.*(stock|private))|(tsla))|(buy.*tesla.*)`)
+          )
           .map((tweet) => {
             const index = bisector.left(tesla, new Date(tweet.created_at)) - 1;
             return {

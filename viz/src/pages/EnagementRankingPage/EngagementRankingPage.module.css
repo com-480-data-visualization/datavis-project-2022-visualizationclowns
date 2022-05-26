@@ -3,3 +3,15 @@
   font-weight: bold;
   color: var(--text-color);
 }
+
+.texts {
+  margin-top: 60px;
+  margin-left: 60px;
+}
+
+.texts > section {
+  width: 300px;
+  font-weight: regular;
+  font-size: 18px;
+  text-align: justify;
+}

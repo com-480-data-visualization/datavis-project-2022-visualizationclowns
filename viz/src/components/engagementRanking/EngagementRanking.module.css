@@ -1,23 +1,23 @@
 .container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: calc(80vw - 880px) 880px;
   height: 100%;
-  align-items: center;
 }
 
 .ranking {
   width: 100%;
-  height: 55%;
+  height: 100%;
 }
 
 .tweets {
-  display: flex;
-  height: 45%;
+  display: grid;
+  grid-template-columns: auto auto;
+  flex-direction: column;
+  height: 100%;
   overflow-y: auto;
   overflow-x: auto;
   align-items: flex-start;
-  width: 90vw;
   position: relative;
   scroll-behavior: smooth;
 }
