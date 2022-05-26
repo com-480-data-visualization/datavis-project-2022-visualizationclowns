@@ -83,7 +83,7 @@ const MainChart = ({ asset, tweets }) => {
 
     function zoomed(event) {
       const xz = event.transform.rescaleX(x);
-      linepath.attr("d", line(price, xz));
+      linepath.attr("d", line(xz));
       grad.attr("offset", (d) => xz(new Date(d.Date)) / width);
       avpath.attr("d", avline(price, xz)).attr("stroke", gradient);
       tweetsdots(xz);
@@ -107,15 +107,15 @@ const MainChart = ({ asset, tweets }) => {
             .ticks(width / 170)
             .tickSizeOuter(0)
         )
-        .append('g')
-        .attr('class', 'axis-label')
-        .append('text')
+        .append("g")
+        .attr("class", "axis-label")
+        .append("text")
         .text(label)
-        .attr('x', margin.left + (width - margin.left - margin.right) / 2)
-        .attr('y', 50)
-        .attr('fill', "currentColor");
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", 50)
+        .attr("fill", "currentColor");
 
-    const gx = svg.append("g").call(xAxis, x, 'Date');
+    const gx = svg.append("g").call(xAxis, x, "Date");
 
     const y = d3
       .scaleLinear()
@@ -126,18 +126,21 @@ const MainChart = ({ asset, tweets }) => {
       g.attr("transform", `translate(${margin.left},0)`)
         .style("font-size", "18px")
         .call(d3.axisLeft(y).ticks(5).tickSize(2))
-        .append('text')
-        .attr('class', 'axis-label')
+        .append("text")
+        .attr("class", "axis-label")
         .text(label)
-        .attr('transform', 'rotate(-90)')
-        .attr('x', -(margin.top + (height - margin.top - margin.bottom) / 2) + 50)
-        .attr('y', -80)
-        .attr('fill', "currentColor");
+        .attr("transform", "rotate(-90)")
+        .attr(
+          "x",
+          -(margin.top + (height - margin.top - margin.bottom) / 2) + 50
+        )
+        .attr("y", -80)
+        .attr("fill", "currentColor");
 
       g.selectAll("g.tick text").attr("transform", "rotate(5)");
     };
 
-    svg.append("g").call(yAxis, y, 'Price (in USD)');
+    svg.append("g").call(yAxis, y, "Price (in USD)");
 
     // Add the brushing
     const brush = (x) =>
