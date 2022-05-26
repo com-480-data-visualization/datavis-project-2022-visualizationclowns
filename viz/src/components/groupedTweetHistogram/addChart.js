@@ -35,16 +35,10 @@ export const addChart = (Y, svg, container) => {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function (i) {
-      return x(X[i]);
-    })
-    .attr("y", function (i) {
-      return y(Y[i]);
-    })
+    .attr("x", (i) => x(X[i]))
+    .attr("y", (i) => y(Y[i]))
     .attr("width", x.bandwidth())
-    .attr("height", function (i) {
-      return height - margin.bottom - y(Y[i]);
-    })
+    .attr("height", (i) => height - margin.bottom - y(Y[i]))
     .on("mouseover", function (d, i) {
       d3.select(this).attr("style", "fill: darkblue;");
       const xPosition = parseFloat(d3.select(this).attr("x"));

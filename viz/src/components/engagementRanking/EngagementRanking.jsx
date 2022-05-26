@@ -62,13 +62,14 @@ const EngagementRanking = ({ tweets }) => {
             .ticks(width / 80)
             .tickSizeOuter(0)
             .tickFormat(d3.format(".0%"))
-        ).append('g')
-        .attr('class', 'axis-label')
-        .append('text')
+        )
+        .append("g")
+        .attr("class", "axis-label")
+        .append("text")
         .text(label)
-        .attr('x', margin.left + (width - margin.left - margin.right) / 2)
-        .attr('y', 40)
-        .attr('fill', "currentColor");
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", 40)
+        .attr("fill", "currentColor");
 
     const y = d3
       .scaleLinear()
@@ -80,14 +81,17 @@ const EngagementRanking = ({ tweets }) => {
         .style("font-size", "14px")
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(5))
-        .append('g')
-        .append('text')
-        .attr('class', 'axis-label')
+        .append("g")
+        .append("text")
+        .attr("class", "axis-label")
         .text(label)
-        .attr('transform', 'rotate(-90)')
-        .attr('x', -(margin.top + (height - margin.top - margin.bottom) / 2) + 10)
-        .attr('y', -80)
-        .attr('fill', "currentColor");
+        .attr("transform", "rotate(-90)")
+        .attr(
+          "x",
+          -(margin.top + (height - margin.top - margin.bottom) / 2) + 10
+        )
+        .attr("y", -80)
+        .attr("fill", "currentColor");
 
       g.selectAll("g.tick text").attr("transform", "rotate(5)");
     };
@@ -118,9 +122,7 @@ const EngagementRanking = ({ tweets }) => {
 
       const tweetBoxes = tweetsSvg
         .selectAll(".tweet-box")
-        .data(data, function (d) {
-          return d?.id;
-        });
+        .data(data, (d) => d?.id);
 
       tweetBoxes.enter().each((tweet) => {
         addTweetBox(tweet, tweetsSvg, naviagte);
@@ -152,9 +154,7 @@ const EngagementRanking = ({ tweets }) => {
     // Plotting the relevant tweets
     svg
       .selectAll("circle")
-      .data(tweets, function (d) {
-        return d?.id;
-      })
+      .data(tweets, (d) => d?.id)
       .enter()
       .append("circle")
       .attr("class", "tweetcircle")
@@ -164,12 +164,12 @@ const EngagementRanking = ({ tweets }) => {
       .style("opacity", 0)
       .style("cursor", "pointer")
       // these have to be functions to use the this keyword
-      .on("mouseover", function () {
-        d3.select(this).transition().duration("100").attr("r", 9);
-      })
-      .on("mouseout", function () {
-        d3.select(this).transition().duration("100").attr("r", 5);
-      })
+      .on("mouseover", () =>
+        d3.select(this).transition().duration("100").attr("r", 9)
+      )
+      .on("mouseout", () =>
+        d3.select(this).transition().duration("100").attr("r", 5)
+      )
       .on("click", (event, tweet) => {
         tweetsSvg.selectAll(".tweet-box").remove();
         addTweetBox(tweet, tweetsSvg, history);
@@ -178,14 +178,10 @@ const EngagementRanking = ({ tweets }) => {
 
     svg
       .selectAll("circle")
-      .attr("cx", function (d) {
-        return x(d.dayChange);
-      })
+      .attr("cx", (d) => x(d.dayChange))
       .transition()
       .duration(2000)
-      .attr("cy", function (d) {
-        return y(d?.[selectedMetric]);
-      })
+      .attr("cy", (d) => y(d?.[selectedMetric]))
       .style("opacity", 0.6);
   }, [tweets, selectedMetric]);
 
@@ -212,20 +208,14 @@ const EngagementRanking = ({ tweets }) => {
       .domain([1, d3.max(tweets, (d) => +d?.[selectedMetric])])
       .range([height - margin.bottom, margin.top]);
 
-    svg.selectAll("circle").data(tweets, function (d) {
-      return d?.id;
-    });
+    svg.selectAll("circle").data(tweets, (d) => d?.id);
 
     svg
       .selectAll("circle")
-      .attr("cx", function (d) {
-        return x(d.dayChange);
-      })
+      .attr("cx", (d) => x(d.dayChange))
       .transition()
       .duration(2000)
-      .attr("cy", function (d) {
-        return y(d?.[selectedMetric]);
-      })
+      .attr("cy", (d) => y(d?.[selectedMetric]))
       .style("opacity", 0.6);
   }, [selectedMetric]);
 
