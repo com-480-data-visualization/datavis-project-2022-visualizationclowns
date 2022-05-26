@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
 import { useNavigate } from "react-router-dom";
 import uid from "../../utils/uid";
-import debounce from "../../utils/debounce";
+
 const MainChart = ({ asset, tweets }) => {
   let price = asset.slice(-1000); //TODO filter based on time?
   const margin = { top: 10, right: 30, bottom: 50, left: 100 };
@@ -150,7 +150,7 @@ const MainChart = ({ asset, tweets }) => {
           [margin.left, margin.top],
           [width - margin.right, height - margin.bottom],
         ])
-        .on("start brush end", debounce(brushed(x), 50));
+        .on("start end", brushed(x));
 
     const brushg = svg.append("g").attr("class", "brush").call(brush(x));
 

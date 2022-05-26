@@ -3,7 +3,6 @@ import css from "./EngagementRanking.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
 import { useNavigate } from "react-router-dom";
-import debounce from "../../utils/debounce";
 
 const EngagementRanking = ({ tweets }) => {
   const margin = { top: 10, right: 30, bottom: 60, left: 100 };
@@ -145,7 +144,7 @@ const EngagementRanking = ({ tweets }) => {
               [margin.left, 0],
               [width - margin.right, height - margin.bottom],
             ])
-            .on("start brush", debounce(brushed, 100))
+            .on("start end", brushed)
         );
     }
 
