@@ -25,3 +25,17 @@
 .tweets::-webkit-scrollbar {
   display: none;
 }
+
+.metricButtonsContainer {
+  display: flex;
+  gap: 24px;
+  margin: 14px 0px;
+}
+
+.selectedMetric {
+  font-weight: bold;
+}
+
+.metricButton {
+  cursor: pointer;
+}
