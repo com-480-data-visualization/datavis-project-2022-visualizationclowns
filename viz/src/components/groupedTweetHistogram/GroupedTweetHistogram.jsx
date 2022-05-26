@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { addChart } from "./addChart";
 import * as d3 from "d3";
 import css from "./GroupedTweetHistogram.module.css";
-
+import likes from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/likess.png"
+import retweets from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/retweets.png"
+import replies from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/repliess.png"
 const GroupedTweetHistogram = ({ tweets }) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
 
   const metrics = [
-    { metric: "nlikes", name: "Likes" },
-    { metric: "nretweets", name: "Retweets" },
-    { metric: "nreplies", name: "Replies" },
+    { metric: "nlikes", name: "Likes" , src: likes},
+    { metric: "nretweets", name: "Retweets", src: retweets },
+    { metric: "nreplies", name: "Replies", src: replies },
   ];
 
   const [metric, setMetric] = useState("nlikes");
@@ -35,7 +37,7 @@ const GroupedTweetHistogram = ({ tweets }) => {
 
   return (
     <div>
-      GroupedTweetHistogram
+     <h2> Average Engagement Per Tweet </h2>
       <section className={css.metricButtonsContainer}>
         {metrics.map((metric) => (
           <div
@@ -43,6 +45,9 @@ const GroupedTweetHistogram = ({ tweets }) => {
             onClick={() => setMetric(metric.metric)}
             key={metric.metric}
           >
+            <img alt = "logo" src = { metric.src} width={50} height={50} 
+            /> 
+            
             {metric.name}
           </div>
         ))}
