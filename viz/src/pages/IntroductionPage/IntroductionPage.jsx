@@ -49,6 +49,12 @@ const Introduction = ({ nTweets }) => {
           />
           <HeroStats
             size={70}
+            value={95}
+            text={"Twitter followers"}
+            suffix={"M"}
+          />
+          <HeroStats
+            size={70}
             value={255}
             text={"Net Worth"}
             prefix={"$"}
