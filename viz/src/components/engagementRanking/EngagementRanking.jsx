@@ -19,9 +19,6 @@ const EngagementRanking = ({ tweets }) => {
 
   const [selectedMetric, setSelectedMetric] = useState("nlikes");
 
-  // const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
-  // const sortedTweets = [...tweets].sort(order).slice(0, 10);
-
   useEffect(() => {
     if (!rankingRef.current) return;
     const svg = d3.select(rankingRef.current);
@@ -100,7 +97,6 @@ const EngagementRanking = ({ tweets }) => {
     svg.append("g").call(yAxis, "Tweets");
 
     // Add the brushing
-    // console.log(svg.classed("brush"));
     const brushed = ({ selection: [[x0, y0], [x1, y1]] }) => {
       const ymin = y.invert(y1);
       const ymax = y.invert(y0);

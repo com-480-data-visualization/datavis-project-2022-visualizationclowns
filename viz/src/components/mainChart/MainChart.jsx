@@ -241,16 +241,6 @@ const MainChart = ({ asset, tweets }) => {
       .attr("pointer-events", "none")
       .attr("d", (data) => avline(data, x));
 
-    // Animate in the line
-    // const lineLength = path.node().getTotalLength();
-    // path
-    //   .attr("stroke-dasharray", lineLength + " " + lineLength)
-    //   .attr("stroke-dashoffset", lineLength)
-    //   .transition()
-    //   .ease(d3.easeLinear)
-    //   .attr("stroke-dashoffset", 0)
-    //   .duration(6000);
-
     // Plotting the relevant tweets
     const tweetsdots = (x) => {
       svg.selectAll("circle").remove();
