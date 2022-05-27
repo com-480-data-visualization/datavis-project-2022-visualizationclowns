@@ -1,8 +1,6 @@
 import * as d3 from "d3";
 import "./twitter.css";
 
-// TODO: add twitter logo and price change.
-
 export const addTweetBox = (tweet, container, location) => {
   const date = new Date(tweet.created_at);
 
