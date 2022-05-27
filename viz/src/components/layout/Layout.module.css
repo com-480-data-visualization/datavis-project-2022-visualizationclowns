@@ -1,4 +1,5 @@
 .container {
-  height: 80vh;
+  height: 90vh;
   position: relative;
+  overflow: hidden;
 }
