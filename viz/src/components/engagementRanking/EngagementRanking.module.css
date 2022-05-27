@@ -22,6 +22,15 @@
   scroll-behavior: smooth;
 }
 
+@media only screen and (max-width: 1800px) {
+  .tweets {
+    grid-template-columns: auto;
+  }
+  .container {
+    grid-template-columns: calc(80vw - 440px) 440px;
+  }
+}
+
 .tweets::-webkit-scrollbar {
   display: none;
 }
