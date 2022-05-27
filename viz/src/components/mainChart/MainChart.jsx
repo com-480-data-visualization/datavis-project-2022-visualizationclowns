@@ -281,6 +281,27 @@ const MainChart = ({ asset, tweets }) => {
 
   return (
     <article ref={containerRef} className={css.container}>
+      <section className={css.legend}>
+        <section>
+          <div className={css.assetLegend} />
+          <div>Asset price</div>
+        </section>
+        <section>
+          <div
+            className={css.rollingavgLegend}
+            style={{ backgroundColor: "red" }}
+          />
+          <div
+            className={css.rollingavgLegend}
+            style={{ backgroundColor: "green" }}
+          />
+          <div>{n} day rolling average</div>
+        </section>
+        <section>
+          <div className={css.tweetBallLegend} />
+          <div>Tweet</div>
+        </section>
+      </section>
       <section className={css.graph}>
         <svg height="100%" width="100%" ref={graphRef} />
       </section>
