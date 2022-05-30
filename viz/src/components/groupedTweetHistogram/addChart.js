@@ -1,9 +1,9 @@
 import * as d3 from "d3";
 
 export const addChart = (Y, svg, container) => {
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 };
-  const height = container.getBoundingClientRect().height;
-  const width = container.getBoundingClientRect().width;
+  const margin = { top: 10, right: 30, bottom: 40, left: 60 };
+  const height = container.getBoundingClientRect().height - margin.bottom ;
+  const width = container.getBoundingClientRect().width - margin.bottom;
 
   const I = [0, 1, 2];
   const X = ["Bitcoin", "Tesla", "Dogecoin"];
@@ -29,6 +29,21 @@ export const addChart = (Y, svg, container) => {
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y));
 
+    svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "middle")
+    .attr("x", width/2)
+    .attr("y", height - 6)
+    .text("Assets");
+
+    svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 0)
+    .attr("x", -20)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Average Engagement Per Type of Tweet");
   svg
     .selectAll(".bar")
     .data(I)
@@ -41,7 +56,7 @@ export const addChart = (Y, svg, container) => {
     .attr("y", function (i) {
       return y(Y[i]);
     })
-    .attr("width", x.bandwidth())
+    .attr("width", x.bandwidth() - 20)
     .attr("height", function (i) {
       return height - margin.bottom - y(Y[i]);
     })
@@ -65,4 +80,4 @@ export const addChart = (Y, svg, container) => {
       d3.select(this).attr("style", "outline: thin solid clear;");
       d3.select("#tooltip").remove();
     });
-};
+   };

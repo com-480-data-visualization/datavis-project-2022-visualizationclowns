@@ -28,14 +28,14 @@ const GroupedTweetHistogram = ({ tweets }) => {
       value.forEach((tweet) => {
         totalLikes += Number(tweet[metric]);
       });
-      yValues.push(totalLikes);
+      yValues.push(Math.round(totalLikes/tweets[key].length));
     }
     addChart(yValues, svg, containerRef.current);
   }, [tweets, metric]);
 
   return (
     <div>
-      GroupedTweetHistogram
+      <h1> Which asset has the highest average engagement per tweet?</h1>
       <section className={css.metricButtonsContainer}>
         {metrics.map((metric) => (
           <div
