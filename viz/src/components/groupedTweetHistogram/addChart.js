@@ -44,6 +44,7 @@ export const addChart = (Y, svg, container) => {
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("Average Engagement Per Type of Tweet");
+
   svg
     .selectAll(".bar")
     .data(I)

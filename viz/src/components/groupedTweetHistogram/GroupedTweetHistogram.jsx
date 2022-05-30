@@ -41,6 +41,8 @@ const GroupedTweetHistogram = ({ tweets }) => {
   return (
     <div>
       <h1> Which asset has the highest average engagement per tweet?</h1>
+      <h4> Hover over each bar to see exact values!</h4>
+
       <section className={css.metricButtonsContainer}>
         {metrics.map((metric) => (
           <div
