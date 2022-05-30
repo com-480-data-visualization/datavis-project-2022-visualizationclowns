@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import css from "./Navigation.module.css";
 
 const Navigation = ({ selectedDataset, setSelectedDataset }) => {
-  const datasets = ["Bitcoin", "Dogecoin", "Tesla"];
+  const datasets = ["Dogecoin", "Bitcoin", "Tesla"];
   const sections = [
     { name: "Start", link: "/" },
     { name: "Main", link: "/main" },
@@ -31,6 +31,15 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
     }
     if (e.key === "ArrowRight") {
       setScroll((prev) => prev + 105);
+    }
+    if (e.key === "1") {
+      setSelectedDataset("Dogecoin");
+    }
+    if (e.key === "2") {
+      setSelectedDataset("Bitcoin");
+    }
+    if (e.key === "3") {
+      setSelectedDataset("Tesla");
     }
   }
 

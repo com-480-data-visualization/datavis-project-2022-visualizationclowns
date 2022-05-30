@@ -3,10 +3,9 @@ import css from "./EngagementRanking.module.css";
 import * as d3 from "d3";
 import { addTweetBox } from "../../utils/addTweet";
 import { useNavigate } from "react-router-dom";
-import debounce from "../../utils/debounce";
 
 const EngagementRanking = ({ tweets }) => {
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+  const margin = { top: 10, right: 30, bottom: 60, left: 100 };
   const rankingRef = useRef(null);
   const tweetsRef = useRef(null);
   const containerRef = useRef(null);
@@ -19,9 +18,6 @@ const EngagementRanking = ({ tweets }) => {
   ];
 
   const [selectedMetric, setSelectedMetric] = useState("nlikes");
-
-  // const order = (a, b) => d3.descending(Number(a.nlikes), Number(b.nlikes));
-  // const sortedTweets = [...tweets].sort(order).slice(0, 10);
 
   useEffect(() => {
     if (!rankingRef.current) return;
@@ -51,7 +47,7 @@ const EngagementRanking = ({ tweets }) => {
       .domain([-maxExtent, maxExtent])
       .range([margin.left, width - margin.right]);
 
-    const xAxis = (g) =>
+    const xAxis = (g, label) =>
       g
         .attr("class", "axis")
         .style("font-size", "14px")
@@ -62,28 +58,45 @@ const EngagementRanking = ({ tweets }) => {
             .ticks(width / 80)
             .tickSizeOuter(0)
             .tickFormat(d3.format(".0%"))
-        );
+        )
+        .append("g")
+        .attr("class", "axis-label")
+        .append("text")
+        .text(label)
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", 40)
+        .attr("fill", "currentColor");
 
     const y = d3
       .scaleLinear()
       .domain([1, d3.max(tweets, (d) => +d?.[selectedMetric])])
       .range([height - margin.bottom, margin.top]);
 
-    const yAxis = (g) => {
+    const yAxis = (g, label) => {
       g.attr("class", "axis")
         .style("font-size", "14px")
         .attr("transform", `translate(${margin.left},0)`)
-        .call(d3.axisLeft(y).ticks(5));
+        .call(d3.axisLeft(y).ticks(5))
+        .append("g")
+        .append("text")
+        .attr("class", "axis-label")
+        .text(label)
+        .attr("transform", "rotate(-90)")
+        .attr(
+          "x",
+          -(margin.top + (height - margin.top - margin.bottom) / 2) + 10
+        )
+        .attr("y", -80)
+        .attr("fill", "currentColor");
 
       g.selectAll("g.tick text").attr("transform", "rotate(5)");
     };
 
     svg.selectAll(".axis").remove();
-    svg.append("g").call(xAxis);
-    svg.append("g").call(yAxis);
+    svg.append("g").call(xAxis, "Day Change");
+    svg.append("g").call(yAxis, "Tweets");
 
     // Add the brushing
-    // console.log(svg.classed("brush"));
     const brushed = ({ selection: [[x0, y0], [x1, y1]] }) => {
       const ymin = y.invert(y1);
       const ymax = y.invert(y0);
@@ -104,9 +117,7 @@ const EngagementRanking = ({ tweets }) => {
 
       const tweetBoxes = tweetsSvg
         .selectAll(".tweet-box")
-        .data(data, function (d) {
-          return d?.id;
-        });
+        .data(data, (d) => d?.id);
 
       tweetBoxes.enter().each((tweet) => {
         addTweetBox(tweet, tweetsSvg, naviagte);
@@ -129,7 +140,7 @@ const EngagementRanking = ({ tweets }) => {
               [margin.left, 0],
               [width - margin.right, height - margin.bottom],
             ])
-            .on("start brush", debounce(brushed, 100))
+            .on("start end", brushed)
         );
     }
 
@@ -138,9 +149,7 @@ const EngagementRanking = ({ tweets }) => {
     // Plotting the relevant tweets
     svg
       .selectAll("circle")
-      .data(tweets, function (d) {
-        return d?.id;
-      })
+      .data(tweets, (d) => d?.id)
       .enter()
       .append("circle")
       .attr("class", "tweetcircle")
@@ -150,12 +159,12 @@ const EngagementRanking = ({ tweets }) => {
       .style("opacity", 0)
       .style("cursor", "pointer")
       // these have to be functions to use the this keyword
-      .on("mouseover", function () {
-        d3.select(this).transition().duration("100").attr("r", 9);
-      })
-      .on("mouseout", function () {
-        d3.select(this).transition().duration("100").attr("r", 5);
-      })
+      .on("mouseover", () =>
+        d3.select(this).transition().duration("100").attr("r", 9)
+      )
+      .on("mouseout", () =>
+        d3.select(this).transition().duration("100").attr("r", 5)
+      )
       .on("click", (event, tweet) => {
         tweetsSvg.selectAll(".tweet-box").remove();
         addTweetBox(tweet, tweetsSvg, history);
@@ -164,14 +173,10 @@ const EngagementRanking = ({ tweets }) => {
 
     svg
       .selectAll("circle")
-      .attr("cx", function (d) {
-        return x(d.dayChange);
-      })
+      .attr("cx", (d) => x(d.dayChange))
       .transition()
       .duration(2000)
-      .attr("cy", function (d) {
-        return y(d?.[selectedMetric]);
-      })
+      .attr("cy", (d) => y(d?.[selectedMetric]))
       .style("opacity", 0.6);
   }, [tweets, selectedMetric]);
 
@@ -198,20 +203,14 @@ const EngagementRanking = ({ tweets }) => {
       .domain([1, d3.max(tweets, (d) => +d?.[selectedMetric])])
       .range([height - margin.bottom, margin.top]);
 
-    svg.selectAll("circle").data(tweets, function (d) {
-      return d?.id;
-    });
+    svg.selectAll("circle").data(tweets, (d) => d?.id);
 
     svg
       .selectAll("circle")
-      .attr("cx", function (d) {
-        return x(d.dayChange);
-      })
+      .attr("cx", (d) => x(d.dayChange))
       .transition()
       .duration(2000)
-      .attr("cy", function (d) {
-        return y(d?.[selectedMetric]);
-      })
+      .attr("cy", (d) => y(d?.[selectedMetric]))
       .style("opacity", 0.6);
   }, [selectedMetric]);
 
