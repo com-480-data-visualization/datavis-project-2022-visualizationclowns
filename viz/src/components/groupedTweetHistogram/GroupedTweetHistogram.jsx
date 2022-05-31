@@ -3,10 +3,9 @@ import { addChart } from "./addChart";
 import * as d3 from "d3";
 import css from "./GroupedTweetHistogram.module.css";
 
-
-import likes from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/likess.png"
-import replies from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/repliess.png"
-import retweets from "/Users/shrirangbagdi/Downloads/datavis-project-2022-visualizationclowns/viz/src/components/groupedTweetHistogram/retweets.png"
+import likes from "/likess.png"
+import replies from "/repliess.png"
+import retweets from "/retweets.png"
 
 const GroupedTweetHistogram = ({ tweets }) => {
   const containerRef = useRef(null);
