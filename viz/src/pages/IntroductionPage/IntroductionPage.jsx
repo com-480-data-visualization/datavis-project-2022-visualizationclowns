@@ -41,6 +41,11 @@ const Introduction = ({ nTweets }) => {
         >
           Is Elon Musk manipulating the market?
         </div>
+
+          <Paragraph className={css.introductionText}>
+            Note: Zoom out if you are unable to see the visualizations!  
+          </Paragraph>
+
         <section className={css.stats}>
           <HeroStats
             size={70}
