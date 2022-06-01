@@ -6,10 +6,15 @@ import css from "./GroupedTweetHistogram.module.css";
 import likes from "/like.svg";
 import replies from "/reply.svg";
 import retweets from "/retweet.svg";
+import uparrpw from "/up_arrow.svg";
 
 const GroupedTweetHistogram = ({ tweets }) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
+
+  const [bitcoinAvg, setBitcoinAvg] = useState(undefined);
+  const [dogecoinAvg, setDogecoinAvg] = useState(undefined);
+  const [teslaAvg, setTeslaAvg] = useState(undefined);
 
   const metrics = [
     { metric: "nlikes", name: "Likes", src: likes },
@@ -37,10 +42,23 @@ const GroupedTweetHistogram = ({ tweets }) => {
     addChart(yValues, svg, containerRef.current);
   }, [tweets, selectedMetric]);
 
+  useEffect(() => {
+    setBitcoinAvg(
+      tweets["Bitcoin"].reduce((acc, tweet) => acc + tweet.dayChange, 0) /
+        tweets["Bitcoin"].length
+    );
+    setDogecoinAvg(
+      tweets["Dogecoin"].reduce((acc, tweet) => acc + tweet.dayChange, 0) /
+        tweets["Dogecoin"].length
+    );
+    setTeslaAvg(
+      tweets["Tesla"].reduce((acc, tweet) => acc + tweet.dayChange, 0) /
+        tweets["Tesla"].length
+    );
+  }, [tweets]);
+
   return (
     <div>
-      <h4>Hover over each bar to see exact values!</h4>
-
       <section className={css.metricButtonsContainer}>
         {metrics.map((metric) => (
           <div
@@ -55,15 +73,55 @@ const GroupedTweetHistogram = ({ tweets }) => {
               alt="logo"
               className={css.icon}
               src={metric.src}
-              width={30}
-              height={30}
+              width={24}
+              height={24}
             />
             {metric.name}
           </div>
         ))}
       </section>
-      <section className={css.container} ref={containerRef}>
-        <svg height={"100%"} width={"100%"} ref={svgRef} />
+      <section style={{ display: "flex", gap: "32px" }}>
+        <section className={css.container} ref={containerRef}>
+          <svg height={"100%"} width={"100%"} ref={svgRef} />
+        </section>
+        {bitcoinAvg && dogecoinAvg && teslaAvg && (
+          <section className={css.changeStats}>
+            <span>Average asset price change following an Elon Musk tweet</span>
+            <div>
+              <img
+                alt="logo"
+                className={css.icon}
+                src={uparrpw}
+                width={30}
+                height={30}
+              />
+              <span>Dogecoin</span>
+              <span>{String(dogecoinAvg * 100).substring(0, 4)}%</span>
+            </div>
+            <div>
+              <img
+                alt="logo"
+                className={css.icon}
+                src={uparrpw}
+                width={30}
+                height={30}
+              />
+              <span>Bitcoin</span>
+              <span>{String(bitcoinAvg * 100).substring(0, 4)}%</span>
+            </div>
+            <div>
+              <img
+                alt="logo"
+                className={css.icon}
+                src={uparrpw}
+                width={30}
+                height={30}
+              />
+              <span>Tesla</span>
+              <span>{String(teslaAvg * 100).substring(0, 4)}%</span>
+            </div>
+          </section>
+        )}
       </section>
     </div>
   );

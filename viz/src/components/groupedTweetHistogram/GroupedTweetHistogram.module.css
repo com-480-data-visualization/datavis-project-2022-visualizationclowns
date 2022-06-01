@@ -30,3 +30,40 @@
 .selected {
   font-weight: bold;
 }
+
+.changeStats {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  font-size: 24px;
+  width: 400px;
+  margin-top: -32px;
+  border-left: 1px solid black;
+  padding-left: 80px;
+  margin-bottom: 48px;
+}
+
+.changeStats > div {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  justify-content: space-between;
+  position: relative;
+  margin-left: 48px;
+}
+
+.changeStats > div > img {
+  position: absolute;
+  left: -54px;
+  top: 28px;
+}
+
+.changeStats > div > span:first-child {
+  font-size: 22px;
+  margin-left: 8px;
+}
+
+.changeStats > div > span:last-child {
+  font-size: 32px;
+  font-weight: lighter;
+}

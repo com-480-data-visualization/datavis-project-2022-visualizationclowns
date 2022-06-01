@@ -6,3 +6,19 @@
   position: relative;
   opacity: 0;
 }
+
+.text {
+  margin-top: 32px;
+  margin-left: 100px;
+  width: 900px;
+  font-size: 22px;
+  text-align: justify;
+}
+
+.text2 {
+  margin-top: 32px;
+  margin-left: 100px;
+  width: 400px;
+  font-size: 22px;
+  text-align: justify;
+}

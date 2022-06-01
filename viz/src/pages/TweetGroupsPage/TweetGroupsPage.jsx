@@ -33,14 +33,25 @@ const TweetGroupsPage = ({ tweets }) => {
         Tweets about which assets engages people?
       </h3>
 
-      <section>
+      <section style={{ width: "80vw" }}>
         <GroupedTweetHistogram tweets={tweets} />
-        <Paragraph>
-          We can see that the data points to Tesla having the highest engagement
-          for likes, retweets, and shares. This makes sense as Elon Musk has the
-          highest amount of interaction with Tesla since he is a key part of the
-          company.
-        </Paragraph>
+        <section style={{ display: "flex" }}>
+          <Paragraph className={css.text}>
+            We can see that the data points to Tesla having the highest
+            engagement for likes, retweets, and shares. This makes sense as Elon
+            Musk has the highest amount of interaction with Tesla since he is a
+            key part of the company.
+            <br />
+            <br />
+            Another takeaway is that tweets generally are much more liked than
+            either retweeted or replied to.
+          </Paragraph>
+          <Paragraph className={css.text2}>
+            All categories of assets explored increase following a tweet by Elon
+            Musk. However, it is not that is causation as the overall asset
+            prices have increased during these time frame.
+          </Paragraph>
+        </section>
       </section>
     </Layout>
   );
