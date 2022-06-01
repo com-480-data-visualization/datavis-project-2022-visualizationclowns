@@ -18,13 +18,6 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
   const [scroll, setScroll] = useState(0);
   const [index, setIndex] = useState(0);
 
-  function onWheel(e) {
-    if (e.path.some((tag) => tag.id == "disable")) return;
-
-    const delta = e.deltaY / 8;
-    setScroll((prev) => prev + delta);
-  }
-
   function onKeyPress(e) {
     if (e.key === "ArrowLeft") {
       setScroll((prev) => prev - 105);
@@ -42,14 +35,6 @@ const Navigation = ({ selectedDataset, setSelectedDataset }) => {
       setSelectedDataset("Tesla");
     }
   }
-
-  useEffect(() => {
-    window.addEventListener("wheel", onWheel);
-
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-    };
-  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);

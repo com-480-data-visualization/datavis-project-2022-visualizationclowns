@@ -1,0 +1,39 @@
+.stats {
+  padding-left: 64px;
+  display: flex;
+  gap: 128px;
+  margin: 30px 60px;
+  margin-top: 0;
+}
+
+.title {
+  font-size: 4vw;
+  font-weight: bold;
+  color: var(--text-color);
+  font-weight: 700;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.conclusionText {
+  font-size: 1.5vw;
+  text-align: justify;
+  color: var(--text-color);
+  font-weight: 400;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  width: 75%;
+  left: 35%;
+  font-size: 1vw;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.container {
+  position: relative;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}

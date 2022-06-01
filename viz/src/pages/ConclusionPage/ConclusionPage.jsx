@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "../../components/layout/Layout";
-import css from "../../pages/IntroductionPage/IntroductionPage.module.css";
+import css from "../../pages/ConclusionPage/ConclusionPage.module.css";
 import { HeroStats } from "../../components/heroStats/HeroStats";
 import Paragraph from "../../components/paragraph/Paragraph";
 import * as d3 from "d3";
-import Instruction from "../../components/instruction/Instruction";
-import logo from "/Elon-Musk.jpg"
+import logo from "/elon-musk-transparent.png";
 const ConclusionPage = ({ nTweets }) => {
   const titleRef = useRef(null);
   const textRef = useRef(null);
-  const [showNavHint, setShowNavHint] = useState(false);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -26,52 +24,69 @@ const ConclusionPage = ({ nTweets }) => {
         text.style("opacity", 1);
       }, 200);
     }
-    setTimeout(() => {
-      setShowNavHint(true);
-    }, 5000);
   }, []);
 
   return (
-    <Layout>
-      <article className={css.content}>
-        <div
-          ref={titleRef}
-          style={{ position: "relative", opacity: 0, left: "-100px" }}
-          className={css.title}
-        >
-          Can we consider Elon influential?
-        </div>
-        <center> <img src={logo} alt="Logo" width={300} height={200} /> </center>
-        <section
-          className={css.introductionText}
-          style={{ position: "relative", opacity: 0, bottom: "-100px" }}
-          ref={textRef}
-        >
-          <Paragraph className={css.introductionText}>
-          Everytime Elon Musk tweets, the whole world is watching,
-           reacting, and following. When it comes to the market, 
-           it is difficult to know for sure if a change is due 
-           to any type of influence that he has. There are many 
-           factors at play which, however, isn't enough to 
-           consider him uninfluential.
+    <div className={css.container}>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-10px",
+          left: "-100px",
+          height: "50%",
+        }}
+      >
+        <img src={logo} alt="Logo" height={"100%"} />
+      </div>
+      <Layout>
+        <article className={css.content}>
+          <div
+            ref={titleRef}
+            style={{ position: "relative", opacity: 0, left: "-100px" }}
+            className={css.title}
+          >
+            Correlation does not equal causation
+          </div>
 
-            <br />
-            <br />
-            If you look at the different tweets, there are many 
-            instances such as the tweet on May 15, 2020 where he 
-            tweeted “I still only own 0.25 Bitcoins btw” and the 
-            Bitcoin asset price increased 3.67 %. Or when he tweeted 
-            “Bitcoin is almost as bs as fiat money” and the Bitcoin 
-            asset price increased 1.30 %. 
-            <br />
-            <br />
-            Ultimately we leave the decision up to you, 
-            and hope that these visualizations helped you to gain valuable insight. 
-          </Paragraph>
-        </section>
-        {showNavHint && <Instruction text={"Use arrow keys to navigate ›"} />}
-      </article>
-    </Layout>
+          <section
+            className={css.conclusionText}
+            style={{ position: "relative", opacity: 0, bottom: "-100px" }}
+            ref={textRef}
+          >
+            <Paragraph className={css.conclusionText}>
+              Every time Elon Musk tweets, the whole world is watching,
+              reacting, and following. When looking at some of his tweets, many
+              of them seem to drive the market and correlate with market swings.
+              <br />
+              <br />
+              Instances such as the tweet on May 17, 2021 where he tweeted “To
+              clarify speculation, Tesla has not sold any Bitcoin” and the
+              Bitcoin price fell by -15.01% or when he tweeted “Dogecoin is the
+              people’s crypto” and Dogecoin subsequently rose by over 8%.
+              However, just looking at his tweets only reveals parts of the
+              picture and other factors could have an unknown impact. For
+              example, just before he tweeted and clarified that Tesla had not
+              sold any bitcoin, Tesla had announced that they would stop
+              accepting bitcoin as a payment option, which may have had a
+              greater influence on the Bitcoin price.
+              <br />
+              <br />
+              It is very important to remember that correlation does not equal
+              causation. Some tweets may mention information and opinions that
+              could have an important impact on the asset prices, while other
+              may only correlate with market volatility.
+              <br />
+              <br />
+              There are many factors at play and throughout our visualizations
+              we aim to expose some interesting patterns between Elon Musk’s
+              Twitter activity and relevant asset prices. Ultimately, we leave
+              the decision up to you, and hope that these visualizations helped
+              you to gain valuable insight.
+            </Paragraph>
+          </section>
+        </article>
+      </Layout>
+    </div>
   );
 };
 
