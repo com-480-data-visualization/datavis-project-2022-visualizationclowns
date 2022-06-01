@@ -1,0 +1,8 @@
+.title {
+  font-size: 2vw;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in;
+  position: relative;
+  opacity: 0;
+}

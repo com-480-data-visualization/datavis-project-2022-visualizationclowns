@@ -3,21 +3,21 @@ import { addChart } from "./addChart";
 import * as d3 from "d3";
 import css from "./GroupedTweetHistogram.module.css";
 
-import likes from "/likess.png"
-import replies from "/repliess.png"
-import retweets from "/retweets.png"
+import likes from "/like.svg";
+import replies from "/reply.svg";
+import retweets from "/retweet.svg";
 
 const GroupedTweetHistogram = ({ tweets }) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
 
   const metrics = [
-    { metric: "nlikes", name: "Likes" , src: likes},
-    { metric: "nretweets", name: "Retweets",src: retweets },
-    { metric: "nreplies", name: "Replies", src: replies},
+    { metric: "nlikes", name: "Likes", src: likes },
+    { metric: "nretweets", name: "Retweets", src: retweets },
+    { metric: "nreplies", name: "Replies", src: replies },
   ];
 
-  const [metric, setMetric] = useState("nlikes");
+  const [selectedMetric, setMetric] = useState("nlikes");
 
   useEffect(() => {
     if (!containerRef.current || !svgRef) return;
@@ -30,28 +30,34 @@ const GroupedTweetHistogram = ({ tweets }) => {
     for (const [key, value] of Object.entries(tweets)) {
       let totalLikes = 0;
       value.forEach((tweet) => {
-        totalLikes += Number(tweet[metric]);
+        totalLikes += Number(tweet[selectedMetric]);
       });
-      yValues.push(Math.round(totalLikes/tweets[key].length));
+      yValues.push(Math.round(totalLikes / tweets[key].length));
     }
     addChart(yValues, svg, containerRef.current);
-  }, [tweets, metric]);
+  }, [tweets, selectedMetric]);
 
   return (
     <div>
-      <h1> Which asset has the highest average engagement per tweet?</h1>
-      <h4> Hover over each bar to see exact values!</h4>
+      <h4>Hover over each bar to see exact values!</h4>
 
       <section className={css.metricButtonsContainer}>
         {metrics.map((metric) => (
           <div
-            className={css.metricButton}
+            className={[
+              css.metricButton,
+              metric.metric === selectedMetric && css.selected,
+            ].join(" ")}
             onClick={() => setMetric(metric.metric)}
             key={metric.metric}
           >
-
-<img alt = "logo" src = { metric.src} width={50} height={50} 
-/>
+            <img
+              alt="logo"
+              className={css.icon}
+              src={metric.src}
+              width={30}
+              height={30}
+            />
             {metric.name}
           </div>
         ))}

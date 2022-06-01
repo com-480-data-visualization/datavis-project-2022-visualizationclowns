@@ -1,13 +1,32 @@
 .container {
-  width: 100%;
+  width: 70%;
   height: 450px;
 }
 .metricButtonsContainer {
   display: flex;
   justify-content: space-around;
   width: 250px;
+  position: relative;
+  left: 140px;
+  top: 40px;
 }
 
 .metricButton {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   cursor: pointer;
+  width: 120px;
+}
+
+.metricButton:last-child {
+  margin-left: 24px;
+}
+
+.metricButton > img {
+  opacity: 0.7;
+}
+
+.selected {
+  font-weight: bold;
 }
