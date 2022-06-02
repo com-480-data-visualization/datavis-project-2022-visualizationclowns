@@ -1,0 +1,22 @@
+:root {
+  --main-color: #d17c54;
+  --text-color: white;
+  --header-color: #d97126;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+rect.selection {
+  stroke: none;
+  fill: grey;
+}

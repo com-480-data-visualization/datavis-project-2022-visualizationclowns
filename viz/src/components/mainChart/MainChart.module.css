@@ -1,0 +1,66 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.graph {
+  width: 100%;
+  height: 55%;
+}
+
+.tweets {
+  display: flex;
+  height: 45%;
+  overflow-y: auto;
+  overflow-x: auto;
+  align-items: flex-start;
+  width: 90vw;
+}
+
+.tweets::-webkit-scrollbar {
+  display: none;
+}
+
+.legend {
+  top: 30px;
+  position: absolute;
+  left: 140px;
+  border: 1px solid black;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+.legend > section {
+  display: flex;
+  align-items: center;
+}
+
+.legend > section > div:last-of-type {
+  margin-left: 8px;
+}
+
+.assetLegend {
+  background-color: steelblue;
+  width: 32px;
+  height: 2px;
+}
+
+.tweetBallLegend {
+  width: 16px;
+  height: 16px;
+  background: black;
+  border-radius: 50%;
+  opacity: 0.6;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.rollingavgLegend {
+  width: 16px;
+  height: 2px;
+}

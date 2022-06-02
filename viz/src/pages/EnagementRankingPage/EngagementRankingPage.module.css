@@ -1,0 +1,19 @@
+.title {
+  font-size: 2vw;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: transform 0.7s ease-in-out, opacity 1.7s ease-in;
+  position: relative;
+}
+
+.texts {
+  margin-top: 80px;
+  margin-left: 60px;
+}
+
+.texts > section {
+  width: 300px;
+  font-weight: regular;
+  font-size: 18px;
+  text-align: justify;
+}

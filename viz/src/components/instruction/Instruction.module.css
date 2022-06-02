@@ -1,0 +1,22 @@
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+  }
+
+  50% {
+    transform: translateX(30px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.scrollText {
+  position: absolute;
+  font-size: 24px;
+  font-weight: lighter;
+  animation: bounce 3s ease-in-out infinite;
+  bottom: -45px;
+  right: 0;
+}

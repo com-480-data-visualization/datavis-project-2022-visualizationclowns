@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 64px;
+  align-items: center;
+  position: fixed;
+  background-color: var(--header-color);
+  transition: all 1s ease-in-out;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  justify-content: flex-end;
+}
+
+.radioButtons {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  color: var(--text-color);
+}
+
+.radioButtons > div {
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+.navigationBalls {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 24px;
+}
+
+.navBall {
+  border-radius: 50%;
+  background-color: var(--text-color);
+  opacity: 0.6;
+  height: 16px;
+  width: 16px;
+  margin: 0 8px;
+}

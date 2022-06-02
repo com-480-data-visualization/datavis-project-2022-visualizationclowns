@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(80vw - 880px) 880px;
+  height: 100%;
+}
+
+.ranking {
+  width: 100%;
+  height: 100%;
+}
+
+.tweets {
+  display: grid;
+  grid-template-columns: auto auto;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  align-items: flex-start;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 1800px) {
+  .tweets {
+    grid-template-columns: auto;
+  }
+  .container {
+    grid-template-columns: calc(80vw - 440px) 440px;
+  }
+}
+
+.tweets::-webkit-scrollbar {
+  display: none;
+}
+
+.metricButtonsContainer {
+  display: flex;
+  gap: 24px;
+  margin: 14px 0px;
+}
+
+.selectedMetric {
+  font-weight: bold;
+}
+
+.metricButton {
+  cursor: pointer;
+}

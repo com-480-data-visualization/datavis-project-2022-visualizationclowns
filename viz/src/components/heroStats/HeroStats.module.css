@@ -1,0 +1,35 @@
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+.counter {
+  transition: --num 3s;
+  counter-reset: num var(--num);
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.counter::after {
+  content: counter(num);
+}
+
+.suffix {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-top: 6px;
+  font-weight: lighter;
+}
+
+.container {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container > span {
+  color: var(--text-color);
+  margin-bottom: -8px;
+  opacity: 0.9;
+}
