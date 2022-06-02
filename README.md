@@ -177,6 +177,17 @@ skeleton of the visualization is available at this [link](https://viz-clowns.net
 
 ## Milestone 3 (Friday 3rd June, 5pm)
 
+### Instruction for running locally.
+1. Clone the repository
+2. Navigate to /viz directory inside the repository.
+3. run ```npm install``` to install required dependencies
+4. run ```npm run dev``` to start development server
+5. Go to ```localhost:3000```
+
+Screencast: https://www.youtube.com/watch?v=TYePmjX2zd0
+
+Website: [link](https://viz-clowns.netlify.app/)
+
 **80% of the final grade**
 
 ## Late policy
