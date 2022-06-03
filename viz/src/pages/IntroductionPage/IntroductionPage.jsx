@@ -42,10 +42,6 @@ const Introduction = ({ nTweets }) => {
           Is Elon Musk manipulating the market?
         </div>
 
-          <Paragraph className={css.introductionText}>
-            Note: Zoom out if you are unable to see the visualizations!  
-          </Paragraph>
-
         <section className={css.stats}>
           <HeroStats
             size={70}
@@ -66,6 +62,9 @@ const Introduction = ({ nTweets }) => {
             suffix={"B"}
           />
         </section>
+        <Paragraph className={css.zoomText}>
+          Note: Zoom out if you are unable to see the full visualizations!
+        </Paragraph>
         <section
           className={css.introductionText}
           style={{ position: "relative", opacity: 0, bottom: "-100px" }}

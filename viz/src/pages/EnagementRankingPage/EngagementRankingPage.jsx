@@ -31,11 +31,15 @@ const EngagementRankingPage = ({ tweets }) => {
         <EngagementRanking tweets={tweets} />
       </section>
       <section className={css.texts}>
-        <section>
+        <section style={{ display: "flex", width: "600px", gap: "48px" }}>
           <Paragraph>
             One interesting correlation is that tweets with higher engagement
             correlate with higher variance in the following change of market
             price.
+          </Paragraph>
+          <Paragraph>
+            Some tweets with very high numbers of replies, seem to correlate
+            with large swings in the market.
           </Paragraph>
         </section>
       </section>
