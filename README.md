@@ -188,7 +188,7 @@ Screencast: https://www.youtube.com/watch?v=TYePmjX2zd0
 
 Website: [link](https://viz-clowns.netlify.app/)
 
-Process book: [link](https://github.com/com-480-data-visualization/datavis-project-2022-visualizationclowns/blob/main/Milestone%203%20-%20Dataviz.pdf)
+Process book: [link](https://github.com/com-480-data-visualization/datavis-project-2022-visualizationclowns/blob/main/Milestone%203%20-%20Dataviz.pdf) (linkes may require the pdf to be downloaded to work)
 
 **80% of the final grade**
 
